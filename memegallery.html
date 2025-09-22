@@ -9,9 +9,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
     body { margin:0; font-family:'Poppins',sans-serif; background:#2a1d47; color:white; overflow-x:hidden; }
-    header { position:fixed; top:0; left:0; width:100%; height:80px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); z-index:10; padding:0 40px; display:none; }
+    header { position:fixed; top:0; left:0; width:100%; height:80px; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); z-index:10; padding:0 40px; }
     .nav-links { list-style:none; display:flex; gap:30px; }
-    .nav-links a { color:white; text-decoration:none; font-weight:600; font-size:1.1rem; transition:color 0.3s ease; }
+    .nav-links a { color:white; text-decoration:none; font-weight:600; font-size:1.1rem; transition:color 0.3s ease; cursor:pointer; }
     .nav-links a:hover { color:#ffd700; }
     .social-links { position:absolute; right:40px; display:flex; gap:20px; }
     .social-links a { color:white; font-size:1.3rem; text-decoration:none; transition:color 0.3s ease; }
@@ -21,11 +21,7 @@
     .intro video { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0; }
     .overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:transparent; z-index:1; }
     .intro-content { position:relative; z-index:2; text-align:center; }
-    .intro-title {
-      font-size:5rem; font-weight:900; letter-spacing:10px;
-      color:#fff; text-shadow:0 0 20px rgba(255,255,255,0.9),0 0 40px rgba(255,215,0,0.8);
-      opacity:0; display:none;
-    }
+    .intro-title { font-size:4rem; font-weight:900; letter-spacing:8px; color:#fff; text-shadow:0 0 20px rgba(255,255,255,0.9),0 0 40px rgba(255,215,0,0.8); opacity:0; display:none; animation: fadeIn 1.5s forwards; }
 
     .gallery-section { min-height:100vh; padding:120px 20px; background:#2a1d47; display:none; }
     .gallery-title { text-align:center; font-size:3rem; font-weight:900; margin-bottom:60px; }
@@ -33,13 +29,25 @@
     .meme-card { background:rgba(255,255,255,0.05); padding:20px; border-radius:12px; text-align:center; transition:transform 0.3s ease; }
     .meme-card:hover { transform:translateY(-8px); }
     .meme-card img { max-width:100%; border-radius:8px; margin-bottom:15px; }
+
+    @keyframes fadeIn {
+      from { opacity:0; transform:translateY(20px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+
+    @keyframes zoomOutFade {
+      from { transform:scale(1); opacity:1; }
+      to { transform:scale(3); opacity:0; }
+    }
+    .zooming { animation:zoomOutFade 1s forwards; }
   </style>
 </head>
 <body>
   <header id="mainHeader">
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="#gallery">Meme Gallery</a></li>
+      <li><a href="#" data-link="memegallery.html">Meme Gallery</a></li>
+      <li><a href="#" data-link="about.html">About</a></li>
     </ul>
     <div class="social-links">
       <a href="#">🐦</a>
@@ -72,15 +80,26 @@
     const introTitle = document.getElementById('introTitle');
     const gallery = document.getElementById('gallery');
     const header = document.getElementById('mainHeader');
+    const introSection = document.querySelector('.intro');
 
     video.addEventListener('ended', () => {
+      header.style.display = 'flex';
       introTitle.style.display = 'block';
       introTitle.style.opacity = 1;
-      header.style.display = 'flex';
-      setTimeout(() => {
-        gallery.style.display = 'block';
-        window.scrollTo({ top: gallery.offsetTop, behavior: 'smooth' });
-      }, 1000);
+      gallery.style.display = 'block';
+      window.scrollTo({ top: gallery.offsetTop, behavior: 'smooth' });
+    });
+
+    // Zoom transition on nav links
+    document.querySelectorAll('.nav-links a[data-link]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = e.target.getAttribute('data-link');
+        introSection.classList.add('zooming');
+        setTimeout(() => {
+          window.location.href = target;
+        }, 1000);
+      });
     });
   </script>
 </body>
