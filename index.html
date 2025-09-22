@@ -9,12 +9,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
     body { margin:0; font-family:'Poppins',sans-serif; background:#2a1d47; color:white; overflow-x:hidden; }
-    header { position:fixed; top:0; left:0; width:100%; height:80px; display:flex; align-items:center; justify-content:space-between; background:transparent; z-index:10; opacity:0; transform:translateY(-100%); transition:all 1.5s ease; padding:0 40px; }
+    header { position:fixed; top:0; left:0; width:100%; height:80px; display:flex; align-items:center; justify-content:center; background:transparent; z-index:10; opacity:0; transform:translateY(-100%); transition:all 1.5s ease; padding:0 40px; }
     header.visible { opacity:1; transform:translateY(0); background:rgba(0,0,0,0.4); }
     .nav-links { list-style:none; display:flex; gap:30px; }
     .nav-links a { color:white; text-decoration:none; font-weight:600; font-size:1.1rem; transition:color 0.3s ease; }
     .nav-links a:hover { color:#ffd700; }
-    .social-links { display:flex; gap:20px; }
+    .social-links { position:absolute; right:40px; display:flex; gap:20px; }
     .social-links a { color:white; font-size:1.3rem; text-decoration:none; transition:color 0.3s ease; }
     .social-links a:hover { color:#e74c3c; }
 
@@ -27,10 +27,9 @@
       margin-bottom:40px;
       color:#fff; text-shadow:0 0 20px rgba(255,255,255,0.9),0 0 40px rgba(255,215,0,0.8),0 0 60px rgba(255,255,255,0.7);
       opacity:0; display:none;
-      animation: holyFade 3s forwards;
     }
 
-    .hero-buttons { display:flex; gap:20px; justify-content:center; }
+    .hero-buttons { display:none; gap:20px; justify-content:center; opacity:0; }
     .hero-buttons a { background:#e74c3c; color:white; padding:15px 30px; border-radius:30px; text-decoration:none; font-weight:700; transition:all 0.3s ease; }
     .hero-buttons a:hover { background:#c0392b; transform:translateY(-3px); }
 
@@ -39,6 +38,8 @@
       50% { opacity:1; transform:scale(1.05) translateY(0); text-shadow:0 0 30px rgba(255,255,255,1),0 0 60px rgba(255,215,0,0.9); }
       100% { opacity:1; transform:scale(1) translateY(0); text-shadow:0 0 20px rgba(255,255,255,0.9),0 0 40px rgba(255,215,0,0.8); }
     }
+
+    .fadeTogether { animation: holyFade 3s forwards; }
   </style>
 </head>
 <body>
@@ -60,7 +61,7 @@
     <div class="overlay"></div>
     <div class="hero-content">
       <h1 id="heroTitle" class="hero-title">PRISMO</h1>
-      <div class="hero-buttons">
+      <div id="heroButtons" class="hero-buttons">
         <a href="#">Follow on X</a>
         <a href="#">Join the Community</a>
         <a href="#">Buy on Pump.fun</a>
@@ -72,11 +73,13 @@
     const video = document.getElementById('heroVideo');
     const title = document.getElementById('heroTitle');
     const header = document.querySelector('header');
+    const buttons = document.getElementById('heroButtons');
 
     video.addEventListener('ended', () => {
       title.style.display = 'block';
-      title.style.animation = 'holyFade 3s forwards';
-      document.querySelector('.hero-buttons').style.display = 'flex';
+      title.classList.add('fadeTogether');
+      buttons.style.display = 'flex';
+      buttons.classList.add('fadeTogether');
       header.classList.add('visible');
     });
   </script>
