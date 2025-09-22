@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
     body { margin:0; font-family:'Poppins',sans-serif; background:#2a1d47; color:white; overflow-x:hidden; }
-    header { position:fixed; top:0; left:0; width:100%; height:80px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); z-index:10; padding:0 40px; }
+    header { position:fixed; top:0; left:0; width:100%; height:80px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); z-index:10; padding:0 40px; display:none; }
     .nav-links { list-style:none; display:flex; gap:30px; }
     .nav-links a { color:white; text-decoration:none; font-weight:600; font-size:1.1rem; transition:color 0.3s ease; }
     .nav-links a:hover { color:#ffd700; }
@@ -36,7 +36,7 @@
   </style>
 </head>
 <body>
-  <header>
+  <header id="mainHeader">
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="#gallery">Meme Gallery</a></li>
@@ -60,10 +60,10 @@
   <section id="gallery" class="gallery-section">
     <h2 class="gallery-title">Prismo Meme Gallery</h2>
     <div class="gallery-grid">
-      <div class="meme-card"><img src="https://via.placeholder.com/300x200/e74c3c/ffffff?text=Prismo+1" alt="Meme 1"><p>Prismo Meme #1</p></div>
-      <div class="meme-card"><img src="https://via.placeholder.com/300x200/3498db/ffffff?text=Prismo+2" alt="Meme 2"><p>Prismo Meme #2</p></div>
-      <div class="meme-card"><img src="https://via.placeholder.com/300x200/9b59b6/ffffff?text=Prismo+3" alt="Meme 3"><p>Prismo Meme #3</p></div>
-      <div class="meme-card"><img src="https://via.placeholder.com/300x200/f1c40f/ffffff?text=Prismo+4" alt="Meme 4"><p>Prismo Meme #4</p></div>
+      <div class="meme-card"><img src="images/2239063C-0668-4EFA-9EEA-EC2E3BD7BB2C.webp" alt="Meme 1"><p>Prismo Meme #1</p></div>
+      <div class="meme-card"><img src="images/4113DDA5-4897-4BC0-9438-EF7C64F56F5E.webp" alt="Meme 2"><p>Prismo Meme #2</p></div>
+      <div class="meme-card"><img src="images/AF5A7543-139A-4A3E-8D15-BAC539C9B8BB.webp" alt="Meme 3"><p>Prismo Meme #3</p></div>
+      <div class="meme-card"><img src="images/B40C5075-2070-4B7C-9055-CBE28822B840.webp" alt="Meme 4"><p>Prismo Meme #4</p></div>
     </div>
   </section>
 
@@ -71,10 +71,12 @@
     const video = document.getElementById('introVideo');
     const introTitle = document.getElementById('introTitle');
     const gallery = document.getElementById('gallery');
+    const header = document.getElementById('mainHeader');
 
     video.addEventListener('ended', () => {
       introTitle.style.display = 'block';
       introTitle.style.opacity = 1;
+      header.style.display = 'flex';
       setTimeout(() => {
         gallery.style.display = 'block';
         window.scrollTo({ top: gallery.offsetTop, behavior: 'smooth' });
