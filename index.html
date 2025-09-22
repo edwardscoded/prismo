@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
-    body { margin:0; font-family:'Poppins',sans-serif; background:#2a1d47; color:white; overflow-x:hidden; }
+    body { margin:0; font-family:'Poppins',sans-serif; background:#2a1d47; color:white; overflow-x:hidden; transition:transform 0.8s ease, opacity 0.8s ease; }
     header { position:fixed; top:0; left:0; width:100%; height:80px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); z-index:10; padding:0 40px; display:none; }
     .nav-links { list-style:none; display:flex; gap:30px; }
     .nav-links a { color:white; text-decoration:none; font-weight:600; font-size:1.1rem; transition:color 0.3s ease; }
@@ -39,13 +39,21 @@
     .ca-bar span { font-weight:600; font-size:1.1rem; }
     .copy-btn { background:#3498db; border:none; color:#fff; padding:10px 20px; border-radius:20px; cursor:pointer; font-weight:600; transition:background 0.3s ease; }
     .copy-btn:hover { background:#2980b9; }
+
+    @keyframes zoomInFast {
+      from { transform: scale(1); opacity: 1; }
+      to { transform: scale(1.3); opacity: 0; }
+    }
+    body.zooming {
+      animation: zoomInFast 0.8s forwards;
+    }
   </style>
 </head>
 <body>
   <header id="mainHeader">
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
-      <li><a href="memegallery.html">Meme Gallery</a></li>
+      <li><a href="memegallery.html" id="memeGalleryLink">Meme Gallery</a></li>
     </ul>
     <div class="social-links">
       <a href="#">🐦</a>
@@ -78,6 +86,7 @@
     const buttons = document.getElementById('introButtons');
     const header = document.getElementById('mainHeader');
     const caBar = document.getElementById('caBar');
+    const memeLink = document.getElementById('memeGalleryLink');
 
     video.addEventListener('ended', () => {
       introTitle.style.display = 'block';
@@ -85,6 +94,14 @@
       buttons.style.display = 'block';
       caBar.style.display = 'flex';
       header.style.display = 'flex';
+    });
+
+    memeLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.body.classList.add('zooming');
+      setTimeout(() => {
+        window.location.href = 'memegallery.html';
+      }, 800);
     });
 
     function copyCA() {
