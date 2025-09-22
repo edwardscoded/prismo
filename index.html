@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PRISMO - The Meme Coin</title>
+  <title>PRISMO - Home</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
     body { margin:0; font-family:'Poppins',sans-serif; background:#2a1d47; color:white; overflow-x:hidden; }
-    header { position:fixed; top:0; left:0; width:100%; height:80px; display:flex; align-items:center; justify-content:center; background:transparent; z-index:10; opacity:0; transform:translateY(-100%); transition:all 1.5s ease; padding:0 40px; }
-    header.visible { opacity:1; transform:translateY(0); background:rgba(0,0,0,0.4); }
+    header { position:fixed; top:0; left:0; width:100%; height:80px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); z-index:10; padding:0 40px; }
     .nav-links { list-style:none; display:flex; gap:30px; }
     .nav-links a { color:white; text-decoration:none; font-weight:600; font-size:1.1rem; transition:color 0.3s ease; }
     .nav-links a:hover { color:#ffd700; }
@@ -18,35 +17,32 @@
     .social-links a { color:white; font-size:1.3rem; text-decoration:none; transition:color 0.3s ease; }
     .social-links a:hover { color:#e74c3c; }
 
-    .hero { position:relative; width:100%; height:100vh; overflow:hidden; display:flex; align-items:center; justify-content:center; }
-    .hero video { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0; filter:none; }
+    .hero { position:relative; width:100%; height:100vh; overflow:hidden; display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; }
+    .hero video { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0; }
     .overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:transparent; z-index:1; }
-    .hero-content { position:relative; z-index:2; text-align:center; }
+    .hero-content { position:relative; z-index:2; }
     .hero-title {
       font-size:6rem; font-weight:900; letter-spacing:10px;
-      margin-bottom:40px;
-      color:#fff; text-shadow:0 0 20px rgba(255,255,255,0.9),0 0 40px rgba(255,215,0,0.8),0 0 60px rgba(255,255,255,0.7);
+      text-shadow:0 0 25px rgba(255,255,255,0.9),0 0 40px rgba(255,215,0,0.9);
       opacity:0; display:none;
     }
-
-    .hero-buttons { display:none; gap:20px; justify-content:center; opacity:0; }
-    .hero-buttons a { background:#e74c3c; color:white; padding:15px 30px; border-radius:30px; text-decoration:none; font-weight:700; transition:all 0.3s ease; }
+    .hero-buttons { margin-top:40px; display:flex; gap:20px; justify-content:center; opacity:0; display:none; }
+    .hero-buttons a { background:#e74c3c; color:white; padding:15px 30px; border-radius:40px; text-decoration:none; font-weight:600; transition:all 0.3s ease; }
     .hero-buttons a:hover { background:#c0392b; transform:translateY(-3px); }
 
-    @keyframes holyFade {
-      0% { opacity:0; transform:scale(0.8) translateY(30px); text-shadow:none; }
-      50% { opacity:1; transform:scale(1.05) translateY(0); text-shadow:0 0 30px rgba(255,255,255,1),0 0 60px rgba(255,215,0,0.9); }
-      100% { opacity:1; transform:scale(1) translateY(0); text-shadow:0 0 20px rgba(255,255,255,0.9),0 0 40px rgba(255,215,0,0.8); }
+    @keyframes zoomOutFade {
+      from { transform:scale(1); opacity:1; }
+      to { transform:scale(3); opacity:0; }
     }
 
-    .fadeTogether { animation: holyFade 3s forwards; }
+    .zooming { animation:zoomOutFade 1s forwards; }
   </style>
 </head>
 <body>
   <header>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
-      <li><a href="#gallery">Meme Gallery</a></li>
+      <li><a href="memegallery.html" class="meme-link">Meme Gallery</a></li>
     </ul>
     <div class="social-links">
       <a href="#">🐦</a>
@@ -72,15 +68,27 @@
   <script>
     const video = document.getElementById('heroVideo');
     const title = document.getElementById('heroTitle');
-    const header = document.querySelector('header');
     const buttons = document.getElementById('heroButtons');
 
     video.addEventListener('ended', () => {
       title.style.display = 'block';
-      title.classList.add('fadeTogether');
       buttons.style.display = 'flex';
-      buttons.classList.add('fadeTogether');
-      header.classList.add('visible');
+      title.style.transition = 'opacity 2s ease';
+      buttons.style.transition = 'opacity 2s ease';
+      requestAnimationFrame(() => {
+        title.style.opacity = 1;
+        buttons.style.opacity = 1;
+      });
+    });
+
+    // Zoom effect when Meme Gallery link clicked
+    document.querySelector('.meme-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      const hero = document.querySelector('.hero');
+      hero.classList.add('zooming');
+      setTimeout(() => {
+        window.location.href = 'memegallery.html';
+      }, 1000);
     });
   </script>
 </body>
