@@ -27,7 +27,7 @@
       opacity:0; display:none;
     }
 
-    .buttons { display:none; margin-top:30px; }
+    .buttons { display:none; margin-top:30px; opacity:0; }
     .buttons a {
       display:inline-block; margin:10px; padding:15px 30px; border-radius:30px;
       background:#e74c3c; color:#fff; text-decoration:none; font-weight:600;
@@ -35,7 +35,7 @@
     }
     .buttons a:hover { background:#c0392b; transform:translateY(-3px); }
 
-    .ca-bar { margin-top:30px; background:rgba(0,0,0,0.6); padding:15px 25px; border-radius:40px; display:none; align-items:center; justify-content:center; gap:15px; width:max-content; margin-left:auto; margin-right:auto; }
+    .ca-bar { margin-top:30px; background:rgba(0,0,0,0.6); padding:15px 25px; border-radius:40px; display:none; align-items:center; justify-content:center; gap:15px; width:max-content; margin-left:auto; margin-right:auto; opacity:0; }
     .ca-bar span { font-weight:600; font-size:1.1rem; }
     .copy-btn { background:#3498db; border:none; color:#fff; padding:10px 20px; border-radius:20px; cursor:pointer; font-weight:600; transition:background 0.3s ease; }
     .copy-btn:hover { background:#2980b9; }
@@ -47,6 +47,13 @@
     body.zooming {
       animation: zoomInFast 0.8s forwards;
     }
+
+    @keyframes fadeInSmooth {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in { animation: fadeInSmooth 1s forwards; }
   </style>
 </head>
 <body>
@@ -90,9 +97,18 @@
 
     video.addEventListener('ended', () => {
       introTitle.style.display = 'block';
-      introTitle.style.opacity = 1;
-      buttons.style.display = 'block';
-      caBar.style.display = 'flex';
+      introTitle.classList.add('fade-in');
+
+      setTimeout(() => {
+        buttons.style.display = 'block';
+        buttons.classList.add('fade-in');
+      }, 500);
+
+      setTimeout(() => {
+        caBar.style.display = 'flex';
+        caBar.classList.add('fade-in');
+      }, 1000);
+
       header.style.display = 'flex';
     });
 
