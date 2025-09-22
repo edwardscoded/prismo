@@ -27,19 +27,12 @@
       opacity:0; display:none;
     }
 
-    .gallery-section { min-height:100vh; padding:120px 20px; background:#2a1d47; }
+    .gallery-section { min-height:100vh; padding:120px 20px; background:#2a1d47; display:none; }
     .gallery-title { text-align:center; font-size:3rem; font-weight:900; margin-bottom:60px; }
     .gallery-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px; }
     .meme-card { background:rgba(255,255,255,0.05); padding:20px; border-radius:12px; text-align:center; transition:transform 0.3s ease; }
     .meme-card:hover { transform:translateY(-8px); }
     .meme-card img { max-width:100%; border-radius:8px; margin-bottom:15px; }
-
-    @keyframes zoomOutFade {
-      from { transform:scale(1); opacity:1; }
-      to { transform:scale(3); opacity:0; }
-    }
-
-    .zooming { animation:zoomOutFade 1s forwards; }
   </style>
 </head>
 <body>
@@ -64,7 +57,7 @@
     </div>
   </section>
 
-  <section id="gallery" class="gallery-section" style="display:none;">
+  <section id="gallery" class="gallery-section">
     <h2 class="gallery-title">Prismo Meme Gallery</h2>
     <div class="gallery-grid">
       <div class="meme-card"><img src="https://via.placeholder.com/300x200/e74c3c/ffffff?text=Prismo+1" alt="Meme 1"><p>Prismo Meme #1</p></div>
@@ -78,18 +71,13 @@
     const video = document.getElementById('introVideo');
     const introTitle = document.getElementById('introTitle');
     const gallery = document.getElementById('gallery');
-    const introSection = document.querySelector('.intro');
 
     video.addEventListener('ended', () => {
       introTitle.style.display = 'block';
       introTitle.style.opacity = 1;
       setTimeout(() => {
-        introSection.classList.add('zooming');
-        setTimeout(() => {
-          introSection.style.display = 'none';
-          gallery.style.display = 'block';
-          window.scrollTo({ top: gallery.offsetTop, behavior: 'smooth' });
-        }, 1000);
+        gallery.style.display = 'block';
+        window.scrollTo({ top: gallery.offsetTop, behavior: 'smooth' });
       }, 1000);
     });
   </script>
