@@ -8,244 +8,46 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary-bg: #2a1d47;
-      --secondary-bg: rgba(0,0,0,0.25);
-      --accent-color-1: #e74c3c;
-      --accent-color-2: #3498db;
-      --text-color: #ffffff;
-      --light-alpha-bg: rgba(255,255,255,0.1);
-      --dark-alpha-bg: rgba(42,29,71,0.95);
-      --border-radius-lg: 20px;
-      --border-radius-md: 15px;
-      --header-height: 80px;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--primary-bg);
-      color: var(--text-color);
-      overflow-x: hidden;
-      line-height: 1.6;
-    }
-
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-    header {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      z-index: 1000;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      height: var(--header-height);
-      display: flex;
-      align-items: center;
-    }
-
-    header.transparent { background: transparent; }
-    header.solid { background: var(--dark-alpha-bg); box-shadow: 0 2px 10px rgba(0,0,0,0.4); }
-
-    nav { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-
-    .logo {
-      font-size: 2.2rem;
-      font-weight: 900;
-      color: var(--text-color);
-      letter-spacing: 2px;
-      position: relative;
-      z-index: 1001;
-    }
-
-    .nav-links { display: flex; list-style: none; gap: 40px; }
-    .nav-links a {
-      color: var(--text-color);
-      text-decoration: none;
-      font-size: 1.1rem;
-      font-weight: 600;
-      transition: color 0.3s ease, transform 0.3s ease;
-      position: relative;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      background: var(--accent-color-1);
-      left: 50%; bottom: -5px;
-      transform: translateX(-50%);
-      transition: width 0.3s ease;
-    }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-links a:hover { color: var(--accent-color-1); transform: translateY(-2px); }
-
-    .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 6px; position: relative; z-index: 1001; }
-    .hamburger span { width: 30px; height: 3px; background: var(--text-color); transition: all 0.3s ease; border-radius: 2px; }
-    .hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-    .hamburger.active span:nth-child(2) { opacity: 0; }
-    .hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
-
-    .hero {
-      text-align: center;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      background: linear-gradient(135deg, var(--primary-bg) 0%, #4a2f7a 100%);
-      overflow: hidden;
-    }
-    .hero-background-visual {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-image: url('images/prismo.gif');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      animation: heroBgAnimation 30s infinite alternate;
-      z-index: 0; opacity: 0.6;
-    }
-    @keyframes heroBgAnimation { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.05); opacity: 0.7; } }
-
-    .hero > .container { position: relative; z-index: 2; padding-top: var(--header-height); }
-
-    .hero-title { font-size: 5.5rem; font-weight: 900; margin-bottom: 20px; letter-spacing: 10px; text-shadow: 0 4px 15px rgba(0,0,0,0.8); animation: textGlow 2s infinite alternate; }
-    @keyframes textGlow { 0% { text-shadow: 0 4px 15px rgba(0,0,0,0.8); } 100% { text-shadow: 0 4px 20px rgba(231, 76, 60, 0.7), 0 0 40px rgba(52, 152, 219, 0.5); } }
-
-    .hero-subtitle { font-size: 2.8rem; font-weight: 700; margin-bottom: 40px; letter-spacing: 4px; text-shadow: 0 3px 12px rgba(0,0,0,0.8); color: #ffd700; }
-    .hero-description { font-size: 1.4rem; max-width: 700px; margin: 0 auto 50px; opacity: 0.95; line-height: 1.6; text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
-
-    .buy-button {
-      background: var(--accent-color-1);
-      color: var(--text-color);
-      padding: 20px 50px;
-      border: none;
-      border-radius: 50px;
-      font-size: 1.4rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      cursor: pointer;
-      transition: all 0.4s ease;
-      text-decoration: none;
-      display: inline-block;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
-    }
-    .buy-button:hover { background: #c0392b; transform: translateY(-5px) scale(1.02); box-shadow: 0 15px 30px rgba(231, 76, 60, 0.5); }
-
-    section { padding: 120px 0; position: relative; }
-    .section-title { font-size: 3.5rem; font-weight: 900; letter-spacing: 4px; margin-bottom: 80px; text-align: center; text-shadow: 0 3px 10px rgba(0,0,0,0.5); }
-
-    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 60px; }
-    .meme-card { background: rgba(255,255,255,0.08); border-radius: var(--border-radius-lg); padding: 25px; transition: all 0.4s ease; border: 1px solid rgba(255,255,255,0.05); text-align: center; position: relative; overflow: hidden; }
-    .meme-image-container { width: 100%; height: 200px; margin-bottom: 20px; border-radius: var(--border-radius-md); overflow: hidden; background: var(--light-alpha-bg); }
-    .meme-image-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-    .meme-card:hover .meme-image-container img { transform: scale(1.1); }
-
-    footer { padding: 80px 0 40px; text-align: center; background: rgba(0,0,0,0.45); }
-    .social-links { display: flex; justify-content: center; gap: 30px; margin-bottom: 40px; }
-    .social-link { display: inline-block; width: 60px; height: 60px; background: rgba(255,255,255,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.8rem; transition: all 0.3s ease; }
-    .social-link:hover { background: var(--accent-color-1); transform: scale(1.15) rotate(10deg); }
-
-    .fade-in { opacity:0; transform:translateY(30px); transition: all 0.8s ease-out; }
-    .fade-in.visible { opacity:1; transform:translateY(0); }
+    body { margin:0; font-family:'Poppins',sans-serif; background:#2a1d47; color:white; overflow-x:hidden; }
+    header { position:fixed; top:0; left:0; width:100%; height:80px; display:flex; align-items:center; justify-content:center; background:transparent; z-index:10; }
+    .logo { font-size:2.5rem; font-weight:900; color:white; letter-spacing:4px; opacity:0; transition:opacity 2s ease; }
+    .logo.visible { opacity:1; }
+    .hero { position:relative; width:100%; height:100vh; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+    .hero video { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+    .overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.3); z-index:1; }
+    .hero-content { position:relative; z-index:2; text-align:center; }
+    .hero-title { font-size:6rem; font-weight:900; letter-spacing:10px; text-shadow:0 4px 15px rgba(0,0,0,0.8); display:none; }
   </style>
 </head>
 <body>
-  <header class="transparent">
-    <nav class="container">
-      <div class="logo">PRISMO</div>
-      <div class="hamburger"><span></span><span></span><span></span></div>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#about">About</a></li>
-      </ul>
-    </nav>
+  <header>
+    <div class="logo">PRISMO</div>
   </header>
 
-  <main>
-    <section id="home" class="hero">
-      <div class="hero-background-visual"></div>
-      <div class="container">
-        <h1 class="hero-title fade-in">PRISMO</h1>
-        <h2 class="hero-subtitle fade-in">THE MEME COIN</h2>
-        <p class="hero-description fade-in">Meet Prismo, the adorable prism character that's taking the meme world by storm. Join the fun!</p>
-        <a href="#" class="buy-button fade-in">BUY NOW</a>
-      </div>
-    </section>
-
-    <section id="gallery" class="gallery-section">
-      <div class="container">
-        <h2 class="section-title fade-in">MEME GALLERY</h2>
-        <div class="gallery-grid">
-          <div class="meme-card fade-in"><div class="meme-image-container"><img src="https://via.placeholder.com/300x200/e74c3c/ffffff?text=Prismo+To+The+Moon" alt="Prismo To The Moon"></div><h3>To The Moon</h3></div>
-          <div class="meme-card fade-in"><div class="meme-image-container"><img src="https://via.placeholder.com/300x200/3498db/ffffff?text=Diamond+Hands" alt="Diamond Hands"></div><h3>Diamond Hands</h3></div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <h3>Join the PRISMO Revolution</h3>
-      <div class="social-links">
-        <a href="#" class="social-link">📱</a>
-        <a href="#" class="social-link">🐦</a>
-        <a href="#" class="social-link">💬</a>
-      </div>
-      <p>&copy; 2024 PRISMO. All rights reserved.</p>
+  <section class="hero">
+    <video id="heroVideo" autoplay muted playsinline>
+      <source src="images/grok-video-a4274718-48e7-4a6b-b712-c4f1ff55dc72 (2).mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1 id="heroTitle" class="hero-title">PRISMO</h1>
     </div>
-  </footer>
+  </section>
 
   <script>
-    window.addEventListener('scroll', function() {
-      const header = document.querySelector('header');
-      const heroHeight = document.querySelector('.hero').offsetHeight;
-      if (window.scrollY > heroHeight - 50) {
-        header.classList.add('solid');
-        header.classList.remove('transparent');
-      } else {
-        header.classList.add('transparent');
-        header.classList.remove('solid');
-      }
-    });
+    const video = document.getElementById('heroVideo');
+    const title = document.getElementById('heroTitle');
+    const logo = document.querySelector('.logo');
 
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-      hamburger.classList.toggle('active');
-    });
-
-    const observer = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    video.addEventListener('ended', () => {
+      title.style.display = 'block';
+      title.style.opacity = 0;
+      title.style.transition = 'opacity 2s ease';
+      requestAnimationFrame(() => {
+        title.style.opacity = 1;
       });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
-
-    document.addEventListener('mousemove',(e)=>{
-      if(Math.random()>0.97){ createSparkle(e.clientX,e.clientY); }
+      logo.classList.add('visible');
     });
-
-    function createSparkle(x,y){
-      const sparkle=document.createElement('div');
-      sparkle.style.position='fixed'; sparkle.style.left=x+'px'; sparkle.style.top=y+'px';
-      sparkle.style.width='5px'; sparkle.style.height='5px';
-      sparkle.style.background=['#ff6b6b','#4ecdc4','#45b7d1','#f9ca24'][Math.floor(Math.random()*4)];
-      sparkle.style.borderRadius='50%'; sparkle.style.pointerEvents='none'; sparkle.style.zIndex='2000';
-      document.body.appendChild(sparkle);
-      sparkle.animate([
-        { transform:'scale(0) rotate(0deg)', opacity:1 },
-        { transform:'scale(1) rotate(180deg)', opacity:1 },
-        { transform:'scale(0) rotate(360deg)', opacity:0 }
-      ], { duration:1000, easing:'ease-out' }).onfinish=()=>sparkle.remove();
-    }
   </script>
 </body>
 </html>
