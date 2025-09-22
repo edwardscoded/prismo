@@ -69,13 +69,7 @@
       background-attachment: fixed; /* keeps gif fixed */
     }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(42, 29, 71, 0.6);
-      z-index: 1;
-    }
+    /* Removed overlay */
 
     .hero > .container { position: relative; z-index: 2; }
 
@@ -85,6 +79,7 @@
       margin-bottom: 20px;
       letter-spacing: 8px;
       line-height: 1;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.6); /* add shadow for readability */
     }
 
     .hero-subtitle {
@@ -92,15 +87,17 @@
       font-weight: 700;
       margin-bottom: 40px;
       letter-spacing: 3px;
-      opacity: 0.9;
+      opacity: 0.95;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.6);
     }
 
     .hero-description {
       font-size: 1.3rem;
       max-width: 600px;
       margin: 0 auto 50px;
-      opacity: 0.8;
+      opacity: 0.9;
       line-height: 1.5;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.6);
     }
 
     .buy-button {
