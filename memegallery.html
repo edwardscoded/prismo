@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PRISMO Meme Gallery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    body { margin:0; font-family:'Poppins',sans-serif; background:#2a1d47; color:white; overflow-x:hidden; }
+    header { position:fixed; top:0; left:0; width:100%; height:80px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); z-index:10; padding:0 40px; }
+    .nav-links { list-style:none; display:flex; gap:30px; }
+    .nav-links a { color:white; text-decoration:none; font-weight:600; font-size:1.1rem; transition:color 0.3s ease; }
+    .nav-links a:hover { color:#ffd700; }
+    .social-links { position:absolute; right:40px; display:flex; gap:20px; }
+    .social-links a { color:white; font-size:1.3rem; text-decoration:none; transition:color 0.3s ease; }
+    .social-links a:hover { color:#e74c3c; }
+
+    .intro { position:relative; width:100%; height:100vh; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+    .intro video { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+    .overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:transparent; z-index:1; }
+    .intro-content { position:relative; z-index:2; text-align:center; }
+    .intro-title {
+      font-size:5rem; font-weight:900; letter-spacing:10px;
+      color:#fff; text-shadow:0 0 20px rgba(255,255,255,0.9),0 0 40px rgba(255,215,0,0.8);
+      opacity:0; display:none;
+    }
+
+    .gallery-section { min-height:100vh; padding:120px 20px; background:#2a1d47; }
+    .gallery-title { text-align:center; font-size:3rem; font-weight:900; margin-bottom:60px; }
+    .gallery-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px; }
+    .meme-card { background:rgba(255,255,255,0.05); padding:20px; border-radius:12px; text-align:center; transition:transform 0.3s ease; }
+    .meme-card:hover { transform:translateY(-8px); }
+    .meme-card img { max-width:100%; border-radius:8px; margin-bottom:15px; }
+
+    @keyframes zoomOutFade {
+      from { transform:scale(1); opacity:1; }
+      to { transform:scale(3); opacity:0; }
+    }
+
+    .zooming { animation:zoomOutFade 1s forwards; }
+  </style>
+</head>
+<body>
+  <header>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#gallery">Meme Gallery</a></li>
+    </ul>
+    <div class="social-links">
+      <a href="#">🐦</a>
+      <a href="#">💬</a>
+    </div>
+  </header>
+
+  <section class="intro">
+    <video id="introVideo" autoplay muted playsinline>
+      <source src="images/grok-video-f2e85b0f-4113-4150-a2c9-ec290ff29863.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+    <div class="intro-content">
+      <h1 id="introTitle" class="intro-title">MEME GALLERY</h1>
+    </div>
+  </section>
+
+  <section id="gallery" class="gallery-section" style="display:none;">
+    <h2 class="gallery-title">Prismo Meme Gallery</h2>
+    <div class="gallery-grid">
+      <div class="meme-card"><img src="https://via.placeholder.com/300x200/e74c3c/ffffff?text=Prismo+1" alt="Meme 1"><p>Prismo Meme #1</p></div>
+      <div class="meme-card"><img src="https://via.placeholder.com/300x200/3498db/ffffff?text=Prismo+2" alt="Meme 2"><p>Prismo Meme #2</p></div>
+      <div class="meme-card"><img src="https://via.placeholder.com/300x200/9b59b6/ffffff?text=Prismo+3" alt="Meme 3"><p>Prismo Meme #3</p></div>
+      <div class="meme-card"><img src="https://via.placeholder.com/300x200/f1c40f/ffffff?text=Prismo+4" alt="Meme 4"><p>Prismo Meme #4</p></div>
+    </div>
+  </section>
+
+  <script>
+    const video = document.getElementById('introVideo');
+    const introTitle = document.getElementById('introTitle');
+    const gallery = document.getElementById('gallery');
+    const introSection = document.querySelector('.intro');
+
+    video.addEventListener('ended', () => {
+      introTitle.style.display = 'block';
+      introTitle.style.opacity = 1;
+      setTimeout(() => {
+        introSection.classList.add('zooming');
+        setTimeout(() => {
+          introSection.style.display = 'none';
+          gallery.style.display = 'block';
+          window.scrollTo({ top: gallery.offsetTop, behavior: 'smooth' });
+        }, 1000);
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
