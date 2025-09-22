@@ -1,1 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRISMO - The Meme Coin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #2a1d47;
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            padding: 20px 0;
+            background: transparent;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+            letter-spacing: 2px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.7;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+            min-height: calc(100vh - 100px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .hero-title {
+            font-size: 6rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: 8px;
+            line-height: 1;
+        }
+        
+        .hero-subtitle {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            letter-spacing: 3px;
+            opacity: 0.9;
+        }
+        
+        .hero-description {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto 50px;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+        
+        .buy-button {
+            background: #e74c3c;
+            color: white;
+            padding: 20px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 80px;
+        }
+        
+        .buy-button:hover {
+            background: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
+        }
+        
+        .prismo-image {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 80px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        /* Gallery Section */
+        .gallery-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .gallery-title {
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            margin-bottom: 60px;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .meme-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .meme-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .meme-placeholder {
+            width: 100%;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        
+        .meme-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .meme-description {
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 100px 0;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .features-title {
+            text-align: center;
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            margin-bottom: 60px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .feature-description {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 60px 0 30px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .social-link {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: #e74c3c;
+            transform: scale(1.1);
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 3.5rem;
+                letter-spacing: 4px;
+            }
+            
+            .hero-subtitle {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+            
+            .hero-description {
+                font-size: 1.1rem;
+                padding: 0 20px;
+            }
+            
+            .buy-button {
+                font-size: 1.2rem;
+                padding: 15px 40px;
+            }
+            
+            .prismo-image {
+                max-width: 300px;
+            }
+            
+            .gallery-title {
+                font-size: 2.5rem;
+            }
+            
+            .features-title {
+                font-size: 2.5rem;
+            }
+        }
+        
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">PRISMO</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1 class="hero-title">PRISMO</h1>
+                <h2 class="hero-subtitle">THE MEME COIN</h2>
+                <p class="hero-description">
+                    Meet Prismo, the adorable prism character that's taking the meme world by storm. Join the fun!
+                </p>
+                <a href="#" class="buy-button">BUY NOW</a>
+                <img src="images/ec978173-bc21-49b2-8067-f24c71e9846d.png" alt="PRISMO Character" class="prismo-image">
+            </div>
+        </section>
+
+        <section id="gallery" class="gallery-section">
+            <div class="container">
+                <h2 class="gallery-title fade-in">MEME GALLERY</h2>
+                <div class="gallery-grid">
+                    <div class="meme-card fade-in">
+                        <div class="meme-placeholder">🚀</div>
+                        <h3 class="meme-title">To The Moon</h3>
+                        <p class="meme-description">PRISMO rockets to astronomical heights, leaving paper hands behind!</p>
+                    </div>
+                    <div class="meme-card fade-in">
+                        <div class="meme-placeholder">💎</div>
+                        <h3 class="meme-title">Diamond Hands</h3>
+                        <p class="meme-description">Only the strongest holders deserve PRISMO's rainbow magic!</p>
+                    </div>
+                    <div class="meme-card fade-in">
+                        <div class="meme-placeholder">🌈</div>
+                        <h3 class="meme-title">Prism Power</h3>
+                        <p class="meme-description">Splitting light into pure profit - that's the PRISMO way!</p>
+                    </div>
+                    <div class="meme-card fade-in">
+                        <div class="meme-placeholder">🔥</div>
+                        <h3 class="meme-title">Burn Baby Burn</h3>
+                        <p class="meme-description">Watch those tokens disappear like light through a prism!</p>
+                    </div>
+                    <div class="meme-card fade-in">
+                        <div class="meme-placeholder">⚡</div>
+                        <h3 class="meme-title">Lightning Fast</h3>
+                        <p class="meme-description">PRISMO transactions at the speed of light!</p>
+                    </div>
+                    <div class="meme-card fade-in">
+                        <div class="meme-placeholder">🎭</div>
+                        <h3 class="meme-title">Meme Lord</h3>
+                        <p class="meme-description">The cutest character in the entire crypto universe!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="features-section">
+            <div class="container">
+                <h2 class="features-title fade-in">WHY PRISMO?</h2>
+                <div class="features-grid">
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">🎨</div>
+                        <h3 class="feature-title">Adorable Design</h3>
+                        <p class="feature-description">Our prismatic mascot captures hearts and wallets with irresistible charm.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">🌟</div>
+                        <h3 class="feature-title">Viral Potential</h3>
+                        <p class="feature-description">Built for maximum memeability and social media domination.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">🤝</div>
+                        <h3 class="feature-title">Strong Community</h3>
+                        <p class="feature-description">Join thousands of PRISMO believers spreading rainbow magic worldwide.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <h3 style="margin-bottom: 30px; font-size: 2rem;">Join the PRISMO Revolution</h3>
+            <div class="social-links">
+                <a href="#" class="social-link">📱</a>
+                <a href="#" class="social-link">🐦</a>
+                <a href="#" class="social-link">💬</a>
+                <a href="#" class="social-link">📞</a>
+            </div>
+            <p style="opacity: 0.7; font-size: 0.9rem;">&copy; 2024 PRISMO. All rights reserved. This is not financial advice.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add sparkle effect on mouse move
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.97) {
+                createSparkle(e.clientX, e.clientY);
+            }
+        });
+
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = x + 'px';
+            sparkle.style.top = y + 'px';
+            sparkle.style.width = '4px';
+            sparkle.style.height = '4px';
+            sparkle.style.background = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24'][Math.floor(Math.random() * 4)];
+            sparkle.style.borderRadius = '50%';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.zIndex = '1000';
+            
+            document.body.appendChild(sparkle);
+            
+            sparkle.animate([
+                { transform: 'scale(0) rotate(0deg)', opacity: 1 },
+                { transform: 'scale(1) rotate(180deg)', opacity: 1 },
+                { transform: 'scale(0) rotate(360deg)', opacity: 0 }
+            ], {
+                duration: 1000,
+                easing: 'ease-out'
+            }).onfinish = () => sparkle.remove();
+        }
+    </script>
+</body>
+</html>
