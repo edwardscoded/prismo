@@ -8,54 +8,271 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
-    body { margin:0; font-family:'Poppins',sans-serif; background:#2a1d47; color:white; overflow-x:hidden; }
-    header { position:fixed; top:0; left:0; width:100%; height:80px; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); z-index:10; padding:0 40px; }
-    .nav-links { list-style:none; display:flex; gap:30px; }
-    .nav-links a { color:white; text-decoration:none; font-weight:600; font-size:1.1rem; transition:color 0.3s ease; cursor:pointer; }
-    .nav-links a:hover { color:#ffd700; }
-    .social-links { position:absolute; right:40px; display:flex; gap:20px; }
-    .social-links a { color:white; font-size:1.3rem; text-decoration:none; transition:color 0.3s ease; }
-    .social-links a:hover { color:#e74c3c; }
+    body { 
+      margin:0; 
+      font-family:'Poppins',sans-serif; 
+      background:#2a1d47; 
+      color:white; 
+      overflow-x:hidden; 
+    }
 
-    .intro { position:relative; width:100%; height:100vh; overflow:hidden; display:flex; align-items:center; justify-content:center; }
-    .intro video { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0; }
-    .overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:transparent; z-index:1; }
-    .intro-content { position:relative; z-index:2; text-align:center; }
+    .intro { 
+      position:relative; 
+      width:100%; 
+      height:100vh; 
+      overflow:hidden; 
+      display:flex; 
+      align-items:center; 
+      justify-content:center; 
+    }
+    
+    .intro video { 
+      position:absolute; 
+      top:0; 
+      left:0; 
+      width:100%; 
+      height:100%; 
+      object-fit:cover; 
+      z-index:0; 
+    }
+    
+    .overlay { 
+      position:absolute; 
+      top:0; 
+      left:0; 
+      width:100%; 
+      height:100%; 
+      background:rgba(0,0,0,0.3); 
+      z-index:1; 
+    }
+    
+    .intro-content { 
+      position:relative; 
+      z-index:2; 
+      text-align:center; 
+      max-width: 90%;
+    }
 
-    .intro-title { font-size:5rem; font-weight:900; letter-spacing:10px; color:#fff; text-shadow:0 0 20px rgba(255,255,255,0.9),0 0 40px rgba(255,215,0,0.8); opacity:0; display:none; animation: fadeIn 1.5s forwards; }
-    .button-group { margin-top:30px; display:flex; gap:20px; justify-content:center; flex-wrap:wrap; opacity:0; display:none; animation: fadeIn 1.5s forwards; }
-    .btn { background:#e74c3c; color:white; padding:15px 30px; border:none; border-radius:30px; font-size:1.1rem; font-weight:600; cursor:pointer; transition:0.3s; text-decoration:none; }
-    .btn:hover { background:#c0392b; transform:translateY(-3px); }
+    .intro-title { 
+      font-size:8rem; 
+      font-weight:900; 
+      letter-spacing:15px; 
+      color:#fff; 
+      text-shadow:
+        0 0 30px rgba(0,255,0,0.8),
+        0 0 60px rgba(0,255,0,0.6),
+        0 0 90px rgba(0,255,0,0.4),
+        0 0 120px rgba(0,255,0,0.2); 
+      opacity:0; 
+      display:none; 
+      animation: prismaticGlow 2s forwards, fadeIn 1.5s forwards; 
+      margin-bottom: 50px;
+    }
+    
+    .button-group { 
+      margin-top:40px; 
+      display:flex; 
+      gap:25px; 
+      justify-content:center; 
+      flex-wrap:wrap; 
+      opacity:0; 
+      display:none; 
+      animation: fadeIn 2s 0.5s forwards; 
+    }
+    
+    .btn { 
+      background: linear-gradient(135deg, #00ff88, #00cc70);
+      color: #1a1a1a; 
+      padding: 18px 35px; 
+      border: none; 
+      border-radius: 50px; 
+      font-size: 1.2rem; 
+      font-weight: 700; 
+      cursor: pointer; 
+      transition: all 0.3s ease; 
+      text-decoration: none; 
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 
+        0 0 20px rgba(0,255,136,0.3),
+        0 5px 15px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .btn:hover::before {
+      left: 100%;
+    }
+    
+    .btn:hover { 
+      background: linear-gradient(135deg, #00ffaa, #00dd88);
+      transform: translateY(-3px) scale(1.05); 
+      box-shadow: 
+        0 0 30px rgba(0,255,136,0.5),
+        0 8px 25px rgba(0,0,0,0.3);
+    }
 
-    .ca-bar { margin-top:40px; background:rgba(255,255,255,0.1); padding:15px 25px; border-radius:30px; display:flex; align-items:center; justify-content:center; gap:15px; font-size:1.1rem; opacity:0; display:none; animation: fadeIn 1.5s forwards; }
-    .copy-btn { background:#3498db; border:none; padding:8px 18px; border-radius:20px; color:white; font-weight:600; cursor:pointer; }
-    .copy-btn:hover { background:#2980b9; }
+    .ca-bar { 
+      margin-top: 50px; 
+      background: linear-gradient(135deg, rgba(0,255,136,0.1), rgba(0,204,112,0.1)); 
+      padding: 20px 35px; 
+      border-radius: 50px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 20px; 
+      font-size: 1.3rem; 
+      font-weight: 600;
+      opacity: 0; 
+      display: none; 
+      animation: fadeIn 2s 1s forwards; 
+      border: 2px solid rgba(0,255,136,0.3);
+      box-shadow: 0 0 20px rgba(0,255,136,0.2);
+    }
+    
+    .copy-btn { 
+      background: linear-gradient(135deg, #3498db, #2980b9); 
+      border: none; 
+      padding: 12px 25px; 
+      border-radius: 30px; 
+      color: white; 
+      font-weight: 700; 
+      cursor: pointer; 
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 0 15px rgba(52,152,219,0.3);
+    }
+    
+    .copy-btn:hover { 
+      background: linear-gradient(135deg, #2980b9, #1f618d); 
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(52,152,219,0.5);
+    }
+
+    .enter-prism-btn {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #ff6b6b, #ff5252);
+      color: white;
+      padding: 20px 40px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.4rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: all 0.4s ease;
+      box-shadow: 
+        0 0 25px rgba(255,107,107,0.4),
+        0 8px 20px rgba(0,0,0,0.3);
+      opacity: 0;
+      display: none;
+      animation: fadeIn 2s 1.5s forwards, pulse 2s infinite 3s;
+      z-index: 3;
+    }
+
+    .enter-prism-btn:hover {
+      background: linear-gradient(135deg, #ff5252, #ff1744);
+      transform: translateX(-50%) translateY(-5px) scale(1.05);
+      box-shadow: 
+        0 0 35px rgba(255,107,107,0.6),
+        0 12px 30px rgba(0,0,0,0.4);
+    }
 
     @keyframes fadeIn {
-      from { opacity:0; transform:translateY(20px); }
+      from { opacity:0; transform:translateY(30px); }
       to { opacity:1; transform:translateY(0); }
     }
 
-    @keyframes zoomOutFade {
-      from { transform:scale(1); opacity:1; }
-      to { transform:scale(3); opacity:0; }
+    @keyframes prismaticGlow {
+      0% { 
+        text-shadow: 0 0 30px rgba(0,255,0,0.8);
+      }
+      25% { 
+        text-shadow: 
+          0 0 30px rgba(0,255,255,0.8),
+          0 0 60px rgba(0,255,255,0.6);
+      }
+      50% { 
+        text-shadow: 
+          0 0 30px rgba(255,0,255,0.8),
+          0 0 60px rgba(255,0,255,0.6);
+      }
+      75% { 
+        text-shadow: 
+          0 0 30px rgba(255,255,0,0.8),
+          0 0 60px rgba(255,255,0,0.6);
+      }
+      100% { 
+        text-shadow: 
+          0 0 30px rgba(0,255,136,0.8),
+          0 0 60px rgba(0,255,136,0.6),
+          0 0 90px rgba(0,255,136,0.4);
+      }
     }
-    .zooming { animation:zoomOutFade 1s forwards; }
+
+    @keyframes pulse {
+      0%, 100% { 
+        box-shadow: 
+          0 0 25px rgba(255,107,107,0.4),
+          0 8px 20px rgba(0,0,0,0.3);
+      }
+      50% { 
+        box-shadow: 
+          0 0 35px rgba(255,107,107,0.7),
+          0 8px 20px rgba(0,0,0,0.3);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .intro-title { 
+        font-size: 4rem; 
+        letter-spacing: 8px; 
+      }
+      .btn { 
+        padding: 15px 25px; 
+        font-size: 1rem; 
+      }
+      .ca-bar { 
+        font-size: 1rem; 
+        padding: 15px 25px; 
+      }
+      .enter-prism-btn {
+        font-size: 1.1rem;
+        padding: 15px 30px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .intro-title { 
+        font-size: 3rem; 
+        letter-spacing: 5px; 
+      }
+      .button-group {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
   </style>
 </head>
 <body>
-  <header id="mainHeader">
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="#" data-link="memegallery.html">Meme Gallery</a></li>
-      <li><a href="#" data-link="about.html">About</a></li>
-    </ul>
-    <div class="social-links">
-      <a href="#">🐦</a>
-      <a href="#">💬</a>
-    </div>
-  </header>
-
   <section class="intro">
     <video id="introVideo" autoplay muted playsinline>
       <source src="images/grok-video-a4274718-48e7-4a6b-b712-c4f1ff55dc72 (2).mp4" type="video/mp4">
@@ -65,7 +282,7 @@
       <h1 id="introTitle" class="intro-title">PRISMO</h1>
       <div id="buttonGroup" class="button-group">
         <a href="#" class="btn">Follow on X</a>
-        <a href="#" class="btn">Join the Community</a>
+        <a href="#" class="btn">Join Community</a>
         <a href="#" class="btn">Buy on Pump.fun</a>
       </div>
       <div id="caBar" class="ca-bar">
@@ -73,6 +290,7 @@
         <button class="copy-btn" onclick="copyCA()">Copy</button>
       </div>
     </div>
+    <a href="about.html" id="enterPrismBtn" class="enter-prism-btn">Enter the Prism</a>
   </section>
 
   <script>
@@ -80,34 +298,41 @@
     const introTitle = document.getElementById('introTitle');
     const buttonGroup = document.getElementById('buttonGroup');
     const caBar = document.getElementById('caBar');
-    const header = document.getElementById('mainHeader');
-    const introSection = document.querySelector('.intro');
+    const enterPrismBtn = document.getElementById('enterPrismBtn');
 
     // Show content after video ends
     introVideo.addEventListener('ended', () => {
-      header.style.display = 'flex';
       introTitle.style.display = 'block';
       buttonGroup.style.display = 'flex';
       caBar.style.display = 'flex';
+      enterPrismBtn.style.display = 'block';
     });
 
-    // Copy CA button
+    // Copy CA function
     function copyCA() {
-      navigator.clipboard.writeText("COMING SOON");
-      alert("CA copied to clipboard!");
+      navigator.clipboard.writeText("COMING SOON").then(() => {
+        const btn = document.querySelector('.copy-btn');
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.background = 'linear-gradient(135deg, #3498db, #2980b9)';
+        }, 2000);
+      }).catch(() => {
+        alert("CA copied to clipboard!");
+      });
     }
 
-    // Navigation zoom effect
-    document.querySelectorAll('.nav-links a[data-link]').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const target = e.target.getAttribute('data-link');
-        introSection.classList.add('zooming');
-        setTimeout(() => {
-          window.location.href = target;
-        }, 1000);
-      });
-    });
+    // Fallback for autoplay issues
+    if (introVideo.paused) {
+      setTimeout(() => {
+        introTitle.style.display = 'block';
+        buttonGroup.style.display = 'flex';
+        caBar.style.display = 'flex';
+        enterPrismBtn.style.display = 'block';
+      }, 3000);
+    }
   </script>
 </body>
 </html>
