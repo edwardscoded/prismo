@@ -9,217 +9,128 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
     body {
-      margin:0;
-      font-family:'Poppins',sans-serif;
-      background: radial-gradient(circle at top, #0a0a0f, #000000);
-      color:white;
-      overflow-x:hidden;
-      scroll-behavior: smooth;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #0f0f1a;
+      color: white;
+      overflow-x: hidden;
     }
 
-    /* NAVIGATION */
     header {
       position: fixed;
       top: 0; left: 0;
       width: 100%;
-      height: 70px;
+      height: 80px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 50px;
-      background: rgba(0,0,0,0.75);
-      backdrop-filter: blur(8px);
-      z-index: 100;
-      transition: background 0.3s, box-shadow 0.3s;
+      background: rgba(0,0,0,0.7);
+      z-index: 10;
+      padding: 0 40px;
     }
-    header.scrolled {
-      background: rgba(0,0,0,0.9);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    }
+
     .logo {
-      font-weight: 900;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
+      font-weight: 800;
       color: #00ff88;
-      text-transform: uppercase;
       letter-spacing: 2px;
     }
+
     .nav-links {
       list-style: none;
       display: flex;
-      align-items: center;
-      gap: 40px;
-      margin: 0;
-      padding: 0;
+      gap: 30px;
     }
+
     .nav-links a {
       color: white;
       text-decoration: none;
       font-weight: 600;
-      font-size: 1rem;
-      position: relative;
-      transition: color 0.3s;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
     }
-    .nav-links a::after {
-      content:'';
-      position:absolute;
-      left:0;
-      bottom:-6px;
-      width:0;
-      height:2px;
-      background:#00ff88;
-      transition: width 0.3s;
-    }
+
     .nav-links a:hover {
-      color:#00ff88;
-    }
-    .nav-links a:hover::after {
-      width:100%;
+      color: #00ff88;
     }
 
-    /* HERO */
     .hero {
-      height:100vh;
-      background:url("images/20E0B872-433F-4852-A5CF-6A7962334FFB.jpg") center/cover no-repeat;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:0 20px;
-      position:relative;
-    }
-    .hero::after {
-      content:'';
-      position:absolute;
-      top:0; left:0; right:0; bottom:0;
-      background:rgba(0,0,0,0.45);
-    }
-.hero h1 {
-  position:relative;
-  font-size:7rem;   /* increased from 5rem */
-  font-weight:900;
-  letter-spacing:10px;
-  color:#fff;
-  text-shadow:0 0 40px rgba(0,255,136,0.9);
-  z-index:1;
-  margin:0;
-  transform: translateY(-120px); /* moves text up */
-}
-
-.hero p {
-  position:relative;
-  font-size:1.8rem;   /* bigger tagline */
-  font-weight:500;
-  margin-top:20px;
-  max-width:900px;
-  z-index:1;
-  color:#ddd;
-  transform: translateY(-100px); /* moves tagline up too */
-}
-
-    /* ABOUT SECTION */
-    .about-section {
-      padding:120px 20px;
-      max-width:900px;
-      margin:0 auto;
-      text-align:center;
-      opacity:0;
-      transform: translateY(50px);
-      transition: all 1s ease;
       position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: url('images/20E0B872-433F-4852-A5CF-6A7962334FFB.jpg') no-repeat center center/cover;
     }
-    .about-section.visible {
-      opacity:1;
-      transform: translateY(0);
-    }
-    .about-title {
-      font-size:3rem;
-      font-weight:900;
-      margin-bottom:30px;
-      color:#00ff88;
-      text-shadow:0 0 20px rgba(0,255,136,0.8);
-    }
-    .about-description {
-      font-size:1.3rem;
-      line-height:1.9;
-      opacity:0.95;
-      position: relative;
+
+    .hero-content {
+      text-align: center;
       z-index: 2;
     }
 
-    /* BEAM EFFECT */
-    .beam {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 200px;
-      height: 100%;
-      background: linear-gradient(180deg, rgba(0,255,136,0.4), rgba(0,255,136,0));
-      filter: blur(60px);
-      animation: beamPulse 6s ease-in-out infinite alternate;
-      z-index: 1;
+    .hero h1 {
+      font-size: 6rem;
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(0,255,136,0.8), 0 0 40px rgba(0,255,136,0.6);
+      margin-bottom: 20px;
     }
 
-    @keyframes beamPulse {
-      0% { opacity: 0.4; transform: translateX(-50%) scaleY(0.9);}
-      50% { opacity: 0.8; transform: translateX(-50%) scaleY(1);}
-      100% { opacity: 0.4; transform: translateX(-50%) scaleY(1.1);}
+    .hero p {
+      font-size: 1.6rem;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
+    .about-section {
+      padding: 120px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-section h2 {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 30px;
+      text-shadow: 0 0 20px rgba(0,255,136,0.7);
+    }
+
+    .about-section p {
+      font-size: 1.3rem;
+      line-height: 1.9;
+      opacity: 0.95;
     }
   </style>
 </head>
 <body>
-<header id="mainHeader">
-  <div class="logo">PRISMO</div>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="prismogallery.html">Prismo Gallery</a></li>
-    <li><a href="about.html">About</a></li>
-  </ul>
-</header>
+  <header id="mainHeader">
+    <div class="logo">PRISMO</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="prismogallery.html">Prismo Gallery</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </header>
 
   <section class="hero">
-    <h1>PRISMO</h1>
-    <p>Bending light into infinite possibilities of memes, art, and chaos</p>
+    <div class="hero-content">
+      <h1>PRISMO</h1>
+      <p>Bending light into infinite possibilities of memes, art, and chaos</p>
+    </div>
   </section>
 
-  <section id="aboutSection" class="about-section">
-    <div class="beam"></div>
-    <h2 class="about-title">The Prism Beyond</h2>
-    <p class="about-description">
-      PRISMO is not just a token, it’s a phenomenon.  
-      A cosmic prism suspended in the digital void, bending raw energy into beams of creativity.  
+  <section class="about-section">
+    <h2>About PRISMO</h2>
+    <p>
+      PRISMO is not just a token, it’s a phenomenon. A cosmic prism suspended in the digital void, bending raw energy into beams of creativity.
       <br><br>
-      Every meme is a refraction. Every joke, every piece of art, every spark of chaos in the community becomes another wavelength in the spectrum.  
+      Every meme is a refraction. Every joke, every piece of art, every spark of chaos in the community becomes another wavelength in the spectrum.
       <br><br>
-      To hold PRISMO is to step into the light. It means becoming part of something that can’t be contained, a spectrum radiating across blockchains, timelines, and imaginations.  
+      To hold PRISMO is to step into the light. It means becoming part of something that can’t be contained, a spectrum radiating across blockchains, timelines, and imaginations.
       <br><br>
-      We aren’t chasing charts. We’re following the beam... and the beam always points forward.
+      We aren’t chasing charts. We’re following the beam—and the beam always points forward.
     </p>
   </section>
-
-  <script>
-    // Shrink nav on scroll
-    const header = document.getElementById('mainHeader');
-    window.addEventListener('scroll', () => {
-      if(window.scrollY > 50){
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
-
-    // Reveal about on scroll
-    const revealSections = () => {
-      document.querySelectorAll('.about-section').forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if(rect.top < window.innerHeight - 100){
-          section.classList.add('visible');
-        }
-      });
-    };
-    window.addEventListener('scroll', revealSections);
-    window.addEventListener('load', revealSections);
-  </script>
 </body>
 </html>
