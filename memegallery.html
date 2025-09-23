@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PRISMO Meme Gallery</title>
+  <title>Prismo Gallery</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -137,6 +137,7 @@
       border-radius:12px;
       text-align:center;
       transition:transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
     .meme-card:hover {
       transform:translateY(-8px) scale(1.02);
@@ -147,6 +148,39 @@
       border-radius:8px;
       margin-bottom:15px;
     }
+
+    /* LIGHTBOX */
+    .lightbox {
+      position: fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.9);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      z-index:200;
+      visibility:hidden;
+      opacity:0;
+      transition:opacity 0.3s ease;
+    }
+    .lightbox.active {
+      visibility:visible;
+      opacity:1;
+    }
+    .lightbox img {
+      max-width:90%;
+      max-height:90%;
+      border-radius:12px;
+      box-shadow:0 0 30px rgba(0,255,136,0.7);
+    }
+    .lightbox-close {
+      position:absolute;
+      top:30px;
+      right:40px;
+      font-size:2rem;
+      color:#fff;
+      cursor:pointer;
+    }
   </style>
 </head>
 <body>
@@ -154,25 +188,31 @@
     <div class="logo">PRISMO</div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="memegallery.html">Meme Gallery</a></li>
+      <li><a href="memegallery.html">Prismo Gallery</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
   </header>
 
   <section class="intro">
-    <h1>MEME GALLERY</h1>
+    <h1>PRISMO GALLERY</h1>
   </section>
 
   <section id="gallery" class="gallery-section">
-    <h2 class="gallery-title">Prismo Meme Gallery</h2>
+    <h2 class="gallery-title">The Spectrum of PRISMO</h2>
     <div class="gallery-grid">
-      <div class="meme-card"><img src="images/E99B279C-BBFF-433C-867A-2BAAE76E9045.png" alt="Meme 1"><p>Prismo Meme #1</p></div>
-      <div class="meme-card"><img src="images/DF6EC509-F237-4033-984E-BF3EE1E5007B.jpg" alt="Meme 2"><p>Prismo Meme #2</p></div>
-      <div class="meme-card"><img src="images/D0F5AA99-EDBA-4CA2-8865-B3CE4ACCC41B.png" alt="Meme 3"><p>Prismo Meme #3</p></div>
-      <div class="meme-card"><img src="images/B40C5075-2070-4B7C-9055-CBE28822B840.webp" alt="Meme 4"><p>Prismo Meme #4</p></div>
-      <div class="meme-card"><img src="images/AF5A7543-139A-4A3E-8D15-BAC539C9B8BB.webp" alt="Meme 5"><p>Prismo Meme #5</p></div>
+      <div class="meme-card"><img src="images/E99B279C-BBFF-433C-867A-2BAAE76E9045.png" alt="Prismo Image 1"></div>
+      <div class="meme-card"><img src="images/DF6EC509-F237-4033-984E-BF3EE1E5007B.jpg" alt="Prismo Image 2"></div>
+      <div class="meme-card"><img src="images/D0F5AA99-EDBA-4CA2-8865-B3CE4ACCC41B.png" alt="Prismo Image 3"></div>
+      <div class="meme-card"><img src="images/B40C5075-2070-4B7C-9055-CBE28822B840.webp" alt="Prismo Image 4"></div>
+      <div class="meme-card"><img src="images/AF5A7543-139A-4A3E-8D15-BAC539C9B8BB.webp" alt="Prismo Image 5"></div>
     </div>
   </section>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightboxImg" src="" alt="Expanded Prismo">
+  </div>
 
   <script>
     // Shrink nav on scroll
@@ -196,6 +236,28 @@
     };
     window.addEventListener('scroll', revealSections);
     window.addEventListener('load', revealSections);
+
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const closeBtn = document.querySelector('.lightbox-close');
+
+    document.querySelectorAll('.meme-card img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('active');
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      lightbox.classList.remove('active');
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      if(e.target === lightbox){
+        lightbox.classList.remove('active');
+      }
+    });
   </script>
 </body>
 </html>
