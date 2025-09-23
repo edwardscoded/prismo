@@ -123,6 +123,7 @@
       opacity:0;
       transform: translateY(50px);
       transition: all 1s ease;
+      position: relative;
     }
     .about-section.visible {
       opacity:1;
@@ -133,12 +134,34 @@
       font-weight:900;
       margin-bottom:30px;
       color:#00ff88;
-      text-shadow:0 0 15px rgba(0,255,136,0.5);
+      text-shadow:0 0 20px rgba(0,255,136,0.8);
     }
     .about-description {
-      font-size:1.2rem;
+      font-size:1.3rem;
       line-height:1.9;
       opacity:0.95;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* BEAM EFFECT */
+    .beam {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(0,255,136,0.4), rgba(0,255,136,0));
+      filter: blur(60px);
+      animation: beamPulse 6s ease-in-out infinite alternate;
+      z-index: 1;
+    }
+
+    @keyframes beamPulse {
+      0% { opacity: 0.4; transform: translateX(-50%) scaleY(0.9);}
+      50% { opacity: 0.8; transform: translateX(-50%) scaleY(1);}
+      100% { opacity: 0.4; transform: translateX(-50%) scaleY(1.1);}
     }
   </style>
 </head>
@@ -158,17 +181,17 @@
   </section>
 
   <section id="aboutSection" class="about-section">
+    <div class="beam"></div>
     <h2 class="about-title">The Prism Beyond</h2>
     <p class="about-description">
-      PRISMO is not a token—it is a phenomenon.  
-      A cosmic prism suspended in the digital void, bending raw energy into infinite beams of creativity.  
+      PRISMO is not just a token, it’s a phenomenon.  
+      A cosmic prism suspended in the digital void, bending raw energy into beams of creativity.  
       <br><br>
-      Every meme is a refraction. Every joke, every piece of art, every chaotic spark in the community is a new wavelength in the spectrum.  
+      Every meme is a refraction. Every joke, every piece of art, every spark of chaos in the community becomes another wavelength in the spectrum.  
       <br><br>
-      To hold PRISMO is to step into that light—to become part of a spectrum that cannot be contained,  
-      radiating across blockchains, timelines, and imaginations.  
+      To hold PRISMO is to step into the light. It means becoming part of something that can’t be contained, a spectrum radiating across blockchains, timelines, and imaginations.  
       <br><br>
-      We are not following a chart; we are following the beam. And the beam always points forward.
+      We aren’t chasing charts. We’re following the beam—and the beam always points forward.
     </p>
   </section>
 
