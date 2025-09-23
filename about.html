@@ -94,25 +94,28 @@
       top:0; left:0; right:0; bottom:0;
       background:rgba(0,0,0,0.45);
     }
-    .hero h1 {
-      position:relative;
-      font-size:5rem;
-      font-weight:900;
-      letter-spacing:8px;
-      color:#fff;
-      text-shadow:0 0 30px rgba(0,255,136,0.8);
-      z-index:1;
-      margin:0;
-    }
-    .hero p {
-      position:relative;
-      font-size:1.4rem;
-      font-weight:500;
-      margin-top:20px;
-      max-width:800px;
-      z-index:1;
-      color:#ddd;
-    }
+.hero h1 {
+  position:relative;
+  font-size:7rem;   /* increased from 5rem */
+  font-weight:900;
+  letter-spacing:10px;
+  color:#fff;
+  text-shadow:0 0 40px rgba(0,255,136,0.9);
+  z-index:1;
+  margin:0;
+  transform: translateY(-120px); /* moves text up */
+}
+
+.hero p {
+  position:relative;
+  font-size:1.8rem;   /* bigger tagline */
+  font-weight:500;
+  margin-top:20px;
+  max-width:900px;
+  z-index:1;
+  color:#ddd;
+  transform: translateY(-100px); /* moves tagline up too */
+}
 
     /* ABOUT SECTION */
     .about-section {
@@ -191,7 +194,7 @@
       <br><br>
       To hold PRISMO is to step into the light. It means becoming part of something that can’t be contained, a spectrum radiating across blockchains, timelines, and imaginations.  
       <br><br>
-      We aren’t chasing charts. We’re following the beam—and the beam always points forward.
+      We aren’t chasing charts. We’re following the beam... and the beam always points forward.
     </p>
   </section>
 
