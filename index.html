@@ -65,6 +65,7 @@
         0 0 90px rgba(0,255,0,0.4),
         0 0 120px rgba(0,255,0,0.2); 
       opacity:0; 
+      visibility: hidden;
       display:none; 
       margin-bottom: 50px;
       transform: translateY(50px);
@@ -73,6 +74,7 @@
     .button-group { 
       margin-top:40px; 
       display:none; 
+      visibility: hidden;
       gap:25px; 
       justify-content:center; 
       flex-wrap:wrap; 
@@ -129,6 +131,7 @@
       padding: 20px 35px; 
       border-radius: 50px; 
       display: none; 
+      visibility: hidden;
       align-items: center; 
       justify-content: center; 
       gap: 20px; 
@@ -178,6 +181,7 @@
         0 0 30px rgba(0,255,136,0.4),
         0 10px 25px rgba(0,0,0,0.3);
       opacity: 0;
+      visibility: hidden;
       display: none;
       transform: translateY(50px);
       position: relative;
@@ -283,6 +287,21 @@
       }
     }
 
+    @keyframes zoomTransition {
+      0% { 
+        transform: scale(1); 
+        opacity: 1; 
+      }
+      100% { 
+        transform: scale(4); 
+        opacity: 0; 
+      }
+    }
+
+    .page-zooming {
+      animation: zoomTransition 0.8s ease-in forwards;
+    }
+
     @keyframes pulse {
       0%, 100% { 
         box-shadow: 
@@ -295,10 +314,8 @@
           0 10px 25px rgba(0,0,0,0.3);
       }
     }
-
     /* Responsive Design */
     @media (max-width: 768px) {
-      .intro-title { 
         font-size: 4rem; 
         letter-spacing: 8px; 
       }
@@ -346,7 +363,7 @@
         <button class="copy-btn" onclick="copyCA()">Copy</button>
       </div>
       <div style="display: flex; justify-content: center; width: 100%;">
-        <a href="about.html" id="enterPrismBtn" class="enter-prism-btn">Enter the Prism</a>
+        <a href="#" id="enterPrismBtn" class="enter-prism-btn" onclick="enterPrism(event)">Enter the Prism</a>
       </div>
     </div>
   </section>
@@ -362,26 +379,44 @@
     introVideo.addEventListener('ended', () => {
       // Title appears first with majestic fade
       introTitle.style.display = 'block';
+      introTitle.style.visibility = 'visible';
       introTitle.style.animation = 'titleMajesticFadeIn 2s ease-out forwards';
       
       // Buttons appear after title
       setTimeout(() => {
         buttonGroup.style.display = 'flex';
+        buttonGroup.style.visibility = 'visible';
         buttonGroup.style.animation = 'majesticFadeIn 1.5s ease-out forwards';
       }, 800);
       
       // CA bar appears next
       setTimeout(() => {
         caBar.style.display = 'flex';
+        caBar.style.visibility = 'visible';
         caBar.style.animation = 'majesticFadeIn 1.5s ease-out forwards';
       }, 1400);
       
       // Enter Prism button appears last with pulse
       setTimeout(() => {
         enterPrismBtn.style.display = 'block';
+        enterPrismBtn.style.visibility = 'visible';
         enterPrismBtn.style.animation = 'majesticFadeIn 1.8s ease-out forwards, pulse 2s infinite 2s';
       }, 2000);
     });
+
+    // Enter the Prism zoom transition
+    function enterPrism(event) {
+      event.preventDefault();
+      
+      // Add zoom animation to the entire intro section
+      const introSection = document.querySelector('.intro');
+      introSection.classList.add('page-zooming');
+      
+      // Navigate to about page after zoom animation
+      setTimeout(() => {
+        window.location.href = 'about.html';
+      }, 800);
+    }
 
     // Copy CA function
     function copyCA() {
@@ -403,20 +438,24 @@
     if (introVideo.paused) {
       setTimeout(() => {
         introTitle.style.display = 'block';
+        introTitle.style.visibility = 'visible';
         introTitle.style.animation = 'titleMajesticFadeIn 2s ease-out forwards';
         
         setTimeout(() => {
           buttonGroup.style.display = 'flex';
+          buttonGroup.style.visibility = 'visible';
           buttonGroup.style.animation = 'majesticFadeIn 1.5s ease-out forwards';
         }, 800);
         
         setTimeout(() => {
           caBar.style.display = 'flex';
+          caBar.style.visibility = 'visible';
           caBar.style.animation = 'majesticFadeIn 1.5s ease-out forwards';
         }, 1400);
         
         setTimeout(() => {
           enterPrismBtn.style.display = 'block';
+          enterPrismBtn.style.visibility = 'visible';
           enterPrismBtn.style.animation = 'majesticFadeIn 1.8s ease-out forwards, pulse 2s infinite 2s';
         }, 2000);
       }, 3000);
