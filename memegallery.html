@@ -8,99 +8,194 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
-    body { margin:0; font-family:'Poppins',sans-serif; background:#2a1d47; color:white; overflow-x:hidden; }
-    header { position:fixed; top:0; left:0; width:100%; height:80px; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); z-index:10; padding:0 40px; }
-    .nav-links { list-style:none; display:flex; gap:30px; }
-    .nav-links a { color:white; text-decoration:none; font-weight:600; font-size:1.1rem; transition:color 0.3s ease; cursor:pointer; }
-    .nav-links a:hover { color:#ffd700; }
-    .social-links { position:absolute; right:40px; display:flex; gap:20px; }
-    .social-links a { color:white; font-size:1.3rem; text-decoration:none; transition:color 0.3s ease; }
-    .social-links a:hover { color:#e74c3c; }
-
-    .intro { position:relative; width:100%; height:100vh; overflow:hidden; display:flex; align-items:center; justify-content:center; }
-    .intro video { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0; }
-    .overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:transparent; z-index:1; }
-    .intro-content { position:relative; z-index:2; text-align:center; }
-    .intro-title { font-size:4rem; font-weight:900; letter-spacing:8px; color:#fff; text-shadow:0 0 20px rgba(255,255,255,0.9),0 0 40px rgba(255,215,0,0.8); opacity:0; display:none; animation: fadeIn 1.5s forwards; }
-
-    .gallery-section { min-height:100vh; padding:120px 20px; background:#2a1d47; display:none; }
-    .gallery-title { text-align:center; font-size:3rem; font-weight:900; margin-bottom:60px; }
-    .gallery-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px; }
-    .meme-card { background:rgba(255,255,255,0.05); padding:20px; border-radius:12px; text-align:center; transition:transform 0.3s ease; }
-    .meme-card:hover { transform:translateY(-8px); }
-    .meme-card img { max-width:100%; border-radius:8px; margin-bottom:15px; }
-
-    @keyframes fadeIn {
-      from { opacity:0; transform:translateY(20px); }
-      to { opacity:1; transform:translateY(0); }
+    body {
+      margin:0;
+      font-family:'Poppins',sans-serif;
+      background: radial-gradient(circle at top, #0a0a0f, #000000);
+      color:white;
+      overflow-x:hidden;
+      scroll-behavior: smooth;
     }
 
-    @keyframes zoomOutFade {
-      from { transform:scale(1); opacity:1; }
-      to { transform:scale(3); opacity:0; }
+    /* NAVIGATION */
+    header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 50px;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      transition: background 0.3s, box-shadow 0.3s;
     }
-    .zooming { animation:zoomOutFade 1s forwards; }
+    header.scrolled {
+      background: rgba(0,0,0,0.9);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    .logo {
+      font-weight: 900;
+      font-size: 1.6rem;
+      color: #00ff88;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      width:0;
+      height:2px;
+      background:#00ff88;
+      transition: width 0.3s;
+    }
+    .nav-links a:hover {
+      color:#00ff88;
+    }
+    .nav-links a:hover::after {
+      width:100%;
+    }
+
+    /* HERO */
+    .intro {
+      height:100vh;
+      background:url("images/DF6EC509-F237-4033-984E-BF3EE1E5007B.jpg") center/cover no-repeat;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      position:relative;
+    }
+    .intro::after {
+      content:'';
+      position:absolute;
+      top:0; left:0; right:0; bottom:0;
+      background:rgba(0,0,0,0.45);
+    }
+    .intro h1 {
+      position:relative;
+      font-size:6rem;
+      font-weight:900;
+      letter-spacing:10px;
+      color:#fff;
+      text-shadow:0 0 40px rgba(0,255,136,0.9);
+      z-index:1;
+      margin:0;
+      transform: translateY(-80px);
+    }
+
+    /* GALLERY */
+    .gallery-section {
+      padding:120px 20px;
+      max-width:1200px;
+      margin:0 auto;
+      text-align:center;
+      opacity:0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+    .gallery-section.visible {
+      opacity:1;
+      transform: translateY(0);
+    }
+    .gallery-title {
+      font-size:3rem;
+      font-weight:900;
+      margin-bottom:60px;
+      color:#00ff88;
+      text-shadow:0 0 20px rgba(0,255,136,0.6);
+    }
+    .gallery-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px;
+    }
+    .meme-card {
+      background:rgba(255,255,255,0.05);
+      padding:20px;
+      border-radius:12px;
+      text-align:center;
+      transition:transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .meme-card:hover {
+      transform:translateY(-8px) scale(1.02);
+      box-shadow:0 0 25px rgba(0,255,136,0.5);
+    }
+    .meme-card img {
+      max-width:100%;
+      border-radius:8px;
+      margin-bottom:15px;
+    }
   </style>
 </head>
 <body>
   <header id="mainHeader">
+    <div class="logo">PRISMO</div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="#" data-link="memegallery.html">Meme Gallery</a></li>
-      <li><a href="#" data-link="about.html">About</a></li>
+      <li><a href="memegallery.html">Meme Gallery</a></li>
+      <li><a href="about.html">About</a></li>
     </ul>
-    <div class="social-links">
-      <a href="#">🐦</a>
-      <a href="#">💬</a>
-    </div>
   </header>
 
   <section class="intro">
-    <video id="introVideo" autoplay muted playsinline>
-      <source src="images/grok-video-f2e85b0f-4113-4150-a2c9-ec290ff29863.mp4" type="video/mp4">
-    </video>
-    <div class="overlay"></div>
-    <div class="intro-content">
-      <h1 id="introTitle" class="intro-title">MEME GALLERY</h1>
-    </div>
+    <h1>MEME GALLERY</h1>
   </section>
 
   <section id="gallery" class="gallery-section">
     <h2 class="gallery-title">Prismo Meme Gallery</h2>
     <div class="gallery-grid">
-      <div class="meme-card"><img src="images/2239063C-0668-4EFA-9EEA-EC2E3BD7BB2C.webp" alt="Meme 1"><p>Prismo Meme #1</p></div>
-      <div class="meme-card"><img src="images/4113DDA5-4897-4BC0-9438-EF7C64F56F5E.webp" alt="Meme 2"><p>Prismo Meme #2</p></div>
-      <div class="meme-card"><img src="images/AF5A7543-139A-4A3E-8D15-BAC539C9B8BB.webp" alt="Meme 3"><p>Prismo Meme #3</p></div>
+      <div class="meme-card"><img src="images/E99B279C-BBFF-433C-867A-2BAAE76E9045.png" alt="Meme 1"><p>Prismo Meme #1</p></div>
+      <div class="meme-card"><img src="images/DF6EC509-F237-4033-984E-BF3EE1E5007B.jpg" alt="Meme 2"><p>Prismo Meme #2</p></div>
+      <div class="meme-card"><img src="images/D0F5AA99-EDBA-4CA2-8865-B3CE4ACCC41B.png" alt="Meme 3"><p>Prismo Meme #3</p></div>
       <div class="meme-card"><img src="images/B40C5075-2070-4B7C-9055-CBE28822B840.webp" alt="Meme 4"><p>Prismo Meme #4</p></div>
+      <div class="meme-card"><img src="images/AF5A7543-139A-4A3E-8D15-BAC539C9B8BB.webp" alt="Meme 5"><p>Prismo Meme #5</p></div>
     </div>
   </section>
 
   <script>
-    const video = document.getElementById('introVideo');
-    const introTitle = document.getElementById('introTitle');
-    const gallery = document.getElementById('gallery');
+    // Shrink nav on scroll
     const header = document.getElementById('mainHeader');
-    const introSection = document.querySelector('.intro');
-
-    video.addEventListener('ended', () => {
-      header.style.display = 'flex';
-      introTitle.style.display = 'block';
-      introTitle.style.opacity = 1;
-      gallery.style.display = 'block';
-      window.scrollTo({ top: gallery.offsetTop, behavior: 'smooth' });
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 50){
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
     });
 
-    // Zoom transition on nav links
-    document.querySelectorAll('.nav-links a[data-link]').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const target = e.target.getAttribute('data-link');
-        introSection.classList.add('zooming');
-        setTimeout(() => {
-          window.location.href = target;
-        }, 1000);
+    // Reveal gallery on scroll
+    const revealSections = () => {
+      document.querySelectorAll('.gallery-section').forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if(rect.top < window.innerHeight - 100){
+          section.classList.add('visible');
+        }
       });
-    });
+    };
+    window.addEventListener('scroll', revealSections);
+    window.addEventListener('load', revealSections);
   </script>
 </body>
 </html>
