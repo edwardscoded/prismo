@@ -16,60 +16,154 @@
       overflow-x: hidden;
     }
 
+    /* --- NAVIGATION --- */
     header {
       position: fixed;
       top: 0; left: 0;
       width: 100%;
       height: 80px;
-      display: none; /* hidden until video ends */
+      display: flex;
       align-items: center;
-      justify-content: center;
-      background: rgba(0,0,0,0.6);
+      justify-content: space-between;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
       z-index: 10;
       padding: 0 40px;
     }
 
-    .nav-links { list-style: none; display: flex; gap: 30px; }
-    .nav-links a { color: white; text-decoration: none; font-weight: 600; font-size: 1.1rem; }
-    .nav-links a:hover { color: #ffd700; }
-    .social-links { position: absolute; right: 40px; display: flex; gap: 20px; }
-    .social-links a { color: white; font-size: 1.3rem; text-decoration: none; }
-    .social-links a:hover { color: #e74c3c; }
+    .logo {
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: #ffd700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
 
-    .intro { position: relative; width: 100%; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-    .intro video { position: absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0; }
-    .overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:transparent; z-index:1; }
-    .intro-content { position:relative; z-index:2; text-align:center; }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
 
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ffd700;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .social-links a {
+      color: white;
+      font-size: 1.3rem;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover {
+      color: #e74c3c;
+    }
+
+    /* --- HERO --- */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: url("images/20E0B872-433F-4852-A5CF-6A7962334FFB.jpg") no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 900;
+      color: white;
+      text-shadow: 0px 4px 15px rgba(0,0,0,0.7);
+    }
+
+    /* --- ABOUT SECTION --- */
     .about-section {
-      display: none;
       padding: 120px 20px;
       max-width: 1000px;
       margin: 0 auto;
       text-align: center;
-      animation: fadeIn 1.5s ease forwards;
     }
 
     .about-title {
       font-size: 3rem;
       font-weight: 900;
       margin-bottom: 30px;
+      color: #ffd700;
     }
 
     .about-description {
       font-size: 1.2rem;
       line-height: 1.8;
-      opacity: 0.9;
+      opacity: 0.95;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* --- EXTRA BOTTOM SECTION --- */
+    .about-bottom {
+      background: #1c1234;
+      padding: 100px 20px;
+      text-align: center;
+    }
+
+    .about-bottom h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      color: #ffd700;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .feature-box {
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 30px;
+      transition: transform 0.3s;
+    }
+
+    .feature-box:hover {
+      transform: translateY(-8px);
+    }
+
+    .feature-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #ffd700;
+    }
+
+    .feature-text {
+      font-size: 1rem;
+      opacity: 0.85;
     }
   </style>
 </head>
 <body>
-  <header id="mainHeader">
+  <header>
+    <div class="logo">PRISMO</div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="memegallery.html">Meme Gallery</a></li>
@@ -81,37 +175,37 @@
     </div>
   </header>
 
-  <section class="intro">
-    <video id="aboutVideo" autoplay muted playsinline>
-      <source src="images/grok-video-4184ab81-fc96-46e7-aaa1-21b2e48ffe8c.mp4" type="video/mp4">
-    </video>
-    <div class="overlay"></div>
+  <section class="hero">
+    <h1>Welcome to PRISMO</h1>
   </section>
 
-  <section id="aboutSection" class="about-section">
+  <section class="about-section">
     <h2 class="about-title">What is $PRISMO?</h2>
     <p class="about-description">
-      $PRISMO is more than just a meme coin—it’s a living prism of culture, humor, and community power.  
-      Inspired by the adorable prism mascot, PRISMO brings together crypto enthusiasts who believe in  
-      fun, transparency, and creativity.  
+      $PRISMO is more than just a meme coin—it’s a prism that refracts culture, humor, and creativity into countless directions.  
+      With our mascot PRISMO, we bring joy and chaos into the blockchain, turning every holder into a part of a radiant community.  
       <br><br>
-      At its core, PRISMO shines a light on the meme economy, splitting it into infinite possibilities:  
-      art, memes, contests, NFTs, and community-driven initiatives.  
-      <br><br>
-      Holding $PRISMO means you’re not just an investor—you’re part of a radiant movement to color  
-      the blockchain world with joy and chaos. Together, we’re bending light into something unforgettable.  
+      We’re not just here for the memes—we’re here to split light into infinite possibilities: art, contests, NFTs, and initiatives powered by you.  
+      When you hold $PRISMO, you don’t just hold a coin—you hold a movement.
     </p>
   </section>
 
-  <script>
-    const aboutVideo = document.getElementById('aboutVideo');
-    const aboutSection = document.getElementById('aboutSection');
-    const header = document.getElementById('mainHeader');
-
-    aboutVideo.addEventListener('ended', () => {
-      header.style.display = 'flex'; // show nav
-      aboutSection.style.display = 'block'; // show about
-    });
-  </script>
+  <section class="about-bottom">
+    <h2>Why Join the Prism?</h2>
+    <div class="features">
+      <div class="feature-box">
+        <h3 class="feature-title">🌈 Creativity Unleashed</h3>
+        <p class="feature-text">Memes, art, and ideas come alive in our community. $PRISMO isn’t just a token—it’s a canvas.</p>
+      </div>
+      <div class="feature-box">
+        <h3 class="feature-title">⚡ Community Power</h3>
+        <p class="feature-text">Every holder is part of the light. Together, we shape the direction and energy of PRISMO.</p>
+      </div>
+      <div class="feature-box">
+        <h3 class="feature-title">✨ Infinite Fun</h3>
+        <p class="feature-text">From contests to NFT drops to chaotic memes—we keep the prism glowing with endless possibilities.</p>
+      </div>
+    </div>
+  </section>
 </body>
 </html>
