@@ -11,7 +11,7 @@
     body {
       margin:0;
       font-family:'Poppins',sans-serif;
-      background:#2a1d47;
+      background: radial-gradient(circle at top, #0a0a0f, #000000);
       color:white;
       overflow-x:hidden;
       scroll-behavior: smooth;
@@ -117,7 +117,7 @@
     /* ABOUT SECTION */
     .about-section {
       padding:120px 20px;
-      max-width:1000px;
+      max-width:900px;
       margin:0 auto;
       text-align:center;
       opacity:0;
@@ -137,61 +137,8 @@
     }
     .about-description {
       font-size:1.2rem;
-      line-height:1.8;
+      line-height:1.9;
       opacity:0.95;
-    }
-
-    /* BOTTOM FEATURES */
-    .about-bottom {
-      background:#1c1234;
-      padding:100px 20px;
-      text-align:center;
-      opacity:0;
-      transform: translateY(50px);
-      transition: all 1s ease;
-    }
-    .about-bottom.visible {
-      opacity:1;
-      transform: translateY(0);
-    }
-    .about-bottom h2 {
-      font-size:2.5rem;
-      font-weight:800;
-      margin-bottom:20px;
-      color:#00ff88;
-      text-shadow:0 0 15px rgba(0,255,136,0.5);
-    }
-    .features {
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
-      gap:30px;
-      margin-top:50px;
-    }
-    .feature-box {
-      background:rgba(255,255,255,0.05);
-      border-radius:12px;
-      padding:30px;
-      transition:transform 0.3s;
-    }
-    .feature-box:hover {
-      transform:translateY(-8px);
-      box-shadow:0 0 25px rgba(0,255,136,0.3);
-    }
-    .feature-title {
-      font-size:1.4rem;
-      font-weight:700;
-      margin-bottom:15px;
-      color:#00ff88;
-    }
-    .feature-text {
-      font-size:1rem;
-      opacity:0.85;
-    }
-
-    @media(max-width:768px){
-      .hero h1 { font-size:3rem; letter-spacing:4px; }
-      .hero p { font-size:1rem; }
-      .about-title { font-size:2.2rem; }
     }
   </style>
 </head>
@@ -211,32 +158,18 @@
   </section>
 
   <section id="aboutSection" class="about-section">
-    <h2 class="about-title">What is $PRISMO?</h2>
+    <h2 class="about-title">The Prism Beyond</h2>
     <p class="about-description">
-      $PRISMO is more than a meme coin—it’s a living prism of culture, humor, and creativity.  
-      Inspired by its radiant mascot, PRISMO splits community energy into infinite rays: art, memes, contests, NFTs, and chaos.  
+      PRISMO is not a token—it is a phenomenon.  
+      A cosmic prism suspended in the digital void, bending raw energy into infinite beams of creativity.  
       <br><br>
-      Holding $PRISMO means joining a movement that lights up the blockchain with joy and unpredictability.  
-      Together, we bend light into unforgettable shapes.
+      Every meme is a refraction. Every joke, every piece of art, every chaotic spark in the community is a new wavelength in the spectrum.  
+      <br><br>
+      To hold PRISMO is to step into that light—to become part of a spectrum that cannot be contained,  
+      radiating across blockchains, timelines, and imaginations.  
+      <br><br>
+      We are not following a chart; we are following the beam. And the beam always points forward.
     </p>
-  </section>
-
-  <section id="features" class="about-bottom">
-    <h2>Why Join the Prism?</h2>
-    <div class="features">
-      <div class="feature-box">
-        <h3 class="feature-title">🌈 Creativity Unleashed</h3>
-        <p class="feature-text">A canvas for memes, art, and innovation.</p>
-      </div>
-      <div class="feature-box">
-        <h3 class="feature-title">⚡ Community Power</h3>
-        <p class="feature-text">Every holder is a shard of light, shaping PRISMO’s path.</p>
-      </div>
-      <div class="feature-box">
-        <h3 class="feature-title">✨ Infinite Fun</h3>
-        <p class="feature-text">Chaos, contests, NFTs, and radiant energy that never fades.</p>
-      </div>
-    </div>
   </section>
 
   <script>
@@ -250,9 +183,9 @@
       }
     });
 
-    // Reveal sections on scroll
+    // Reveal about on scroll
     const revealSections = () => {
-      document.querySelectorAll('.about-section, .about-bottom').forEach(section => {
+      document.querySelectorAll('.about-section').forEach(section => {
         const rect = section.getBoundingClientRect();
         if(rect.top < window.innerHeight - 100){
           section.classList.add('visible');
