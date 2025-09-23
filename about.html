@@ -3,103 +3,106 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About PRISMO</title>
+  <title>About Prismo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: #0f0f1a;
-      color: white;
-      overflow-x: hidden;
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body { 
+      margin:0; 
+      font-family:'Poppins',sans-serif; 
+      background:#0f0f1a; 
+      color:white; 
+      overflow-x:hidden;
     }
 
     header {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(0,0,0,0.7);
-      z-index: 10;
-      padding: 0 40px;
+      position:fixed; 
+      top:0; left:0; 
+      width:100%; 
+      height:80px;
+      display:flex; 
+      align-items:center; 
+      justify-content:space-between;
+      background:rgba(0,0,0,0.7); 
+      z-index:10; 
+      padding:0 40px;
     }
-
     .logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #00ff88;
-      letter-spacing: 2px;
+      font-size:1.5rem; 
+      font-weight:800; 
+      color:#00ff88; 
+      letter-spacing:2px;
     }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 30px;
+    .nav-links { 
+      list-style:none; 
+      display:flex; 
+      gap:30px; 
+      margin:0; 
+      padding:0; 
     }
-
     .nav-links a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.1rem;
-      transition: color 0.3s ease;
+      color:white; 
+      text-decoration:none; 
+      font-weight:600; 
+      font-size:1.1rem; 
+      transition:color 0.3s ease;
     }
+    .nav-links a:hover { color:#00ff88; }
 
-    .nav-links a:hover {
-      color: #00ff88;
+    /* Responsive fixes */
+    @media (max-width: 1100px) {
+      header { padding: 0 28px; }
+      .nav-links { gap: 22px; }
+      .nav-links a { font-size: 1rem; }
+    }
+    @media (max-width: 900px) {
+      header { padding: 0 20px; }
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: .95rem; }
     }
 
     .hero {
-      position: relative;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: url('images/20E0B872-433F-4852-A5CF-6A7962334FFB.jpg') no-repeat center center/cover;
+      position:relative; 
+      height:100vh; 
+      display:flex;
+      align-items:flex-start;   /* push content higher */
+      justify-content:center;
+      background:url('images/DF6EC509-F237-4033-984E-BF3EE1E5007B.jpg') no-repeat center center/cover;
+      text-align:center;
+      padding-top:160px; /* moves text higher */
     }
-
-    .hero-content {
-      text-align: center;
-      z-index: 2;
-    }
-
     .hero h1 {
-      font-size: 6rem;
-      font-weight: 900;
-      color: #fff;
-      text-shadow: 0 0 20px rgba(0,255,136,0.8), 0 0 40px rgba(0,255,136,0.6);
-      margin-bottom: 20px;
+      font-size:6rem; 
+      font-weight:900; 
+      margin-bottom:20px;
+      color:#fff;
+      text-shadow:0 0 20px rgba(0,255,136,0.8), 0 0 40px rgba(0,255,136,0.6);
     }
-
     .hero p {
-      font-size: 1.6rem;
-      font-weight: 400;
-      opacity: 0.9;
+      font-size:1.6rem; 
+      max-width:800px; 
+      margin:0 auto;
+      color:#f1f1f1;
     }
 
     .about-section {
-      padding: 120px 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-      text-align: center;
+      max-width:900px; 
+      margin:100px auto; 
+      padding:40px 20px; 
+      text-align:center;
     }
-
     .about-section h2 {
-      font-size: 3rem;
-      font-weight: 900;
-      margin-bottom: 30px;
-      text-shadow: 0 0 20px rgba(0,255,136,0.7);
+      font-size:3rem; 
+      margin-bottom:30px; 
+      text-shadow:0 0 15px rgba(0,255,136,0.6);
     }
-
     .about-section p {
-      font-size: 1.3rem;
-      line-height: 1.9;
-      opacity: 0.95;
+      font-size:1.3rem; 
+      line-height:1.8; 
+      color:#ddd;
     }
   </style>
 </head>
@@ -121,15 +124,13 @@
   </section>
 
   <section class="about-section">
-    <h2>About PRISMO</h2>
+    <h2>About Prismo</h2>
     <p>
-      PRISMO is not just a token, it’s a phenomenon. A cosmic prism suspended in the digital void, bending raw energy into beams of creativity.
-      <br><br>
-      Every meme is a refraction. Every joke, every piece of art, every spark of chaos in the community becomes another wavelength in the spectrum.
-      <br><br>
-      To hold PRISMO is to step into the light. It means becoming part of something that can’t be contained, a spectrum radiating across blockchains, timelines, and imaginations.
-      <br><br>
-      We aren’t chasing charts. We’re following the beam—and the beam always points forward.
+      Prismo isn’t a token—it’s a phenomenon.  
+      A cosmic prism suspended in the digital void, bending raw energy into infinite beams of creativity.  
+      Every meme is a refraction. Every joke, every piece of art, every chaotic spark in the community is a new wavelength in the spectrum.  
+      To hold Prismo is to step into that light—to become part of a spectrum that cannot be contained, radiating across blockchains, timelines, and imaginations.  
+      We aren’t following a chart. We’re following the beam. And the beam always points forward.
     </p>
   </section>
 </body>
