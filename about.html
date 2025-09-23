@@ -8,12 +8,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
-    body { 
-      margin:0; 
-      font-family:'Poppins',sans-serif; 
-      background:#2a1d47; 
-      color:white; 
-      overflow-x:hidden; 
+    body {
+      margin:0;
+      font-family:'Poppins',sans-serif;
+      background:#2a1d47;
+      color:white;
+      overflow-x:hidden;
     }
 
     /* NAVIGATION */
@@ -21,21 +21,21 @@
       position: fixed;
       top: 0; left: 0;
       width: 100%;
-      height: 80px;
+      height: 70px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 40px;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(6px);
-      z-index: 10;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(8px);
+      z-index: 100;
     }
     .logo {
       font-weight: 900;
       font-size: 1.5rem;
       color: #00ff88;
-      letter-spacing: 3px;
       text-transform: uppercase;
+      letter-spacing: 2px;
     }
     .nav-links {
       list-style: none;
@@ -85,89 +85,31 @@
       content:'';
       position:absolute;
       top:0; left:0; right:0; bottom:0;
-      background:rgba(0,0,0,0.4);
+      background:rgba(0,0,0,0.45);
     }
     .hero h1 {
       position:relative;
-      font-size:4rem;
+      font-size:5rem;
       font-weight:900;
-      letter-spacing:10px;
+      letter-spacing:8px;
       color:#fff;
-      text-shadow:0 0 25px rgba(0,255,136,0.8);
+      text-shadow:0 0 30px rgba(0,255,136,0.8);
       z-index:1;
+      margin:0;
     }
     .hero p {
       position:relative;
-      font-size:1.3rem;
+      font-size:1.4rem;
       font-weight:500;
       margin-top:20px;
       max-width:800px;
       z-index:1;
-    }
-
-    /* ABOUT MAIN SECTION */
-    .about-section {
-      padding:120px 20px;
-      max-width:1000px;
-      margin:0 auto;
-      text-align:center;
-    }
-    .about-title {
-      font-size:3rem;
-      font-weight:900;
-      margin-bottom:30px;
-      color:#00ff88;
-      text-shadow:0 0 15px rgba(0,255,136,0.5);
-    }
-    .about-description {
-      font-size:1.2rem;
-      line-height:1.8;
-      opacity:0.95;
-    }
-
-    /* BOTTOM SECTION */
-    .about-bottom {
-      background:#1c1234;
-      padding:100px 20px;
-      text-align:center;
-    }
-    .about-bottom h2 {
-      font-size:2.5rem;
-      font-weight:800;
-      margin-bottom:20px;
-      color:#00ff88;
-      text-shadow:0 0 15px rgba(0,255,136,0.5);
-    }
-    .features {
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
-      gap:30px;
-      margin-top:50px;
-    }
-    .feature-box {
-      background:rgba(255,255,255,0.05);
-      border-radius:12px;
-      padding:30px;
-      transition:transform 0.3s;
-    }
-    .feature-box:hover {
-      transform:translateY(-8px);
-      box-shadow:0 0 25px rgba(0,255,136,0.3);
-    }
-    .feature-title {
-      font-size:1.4rem;
-      font-weight:700;
-      margin-bottom:15px;
-      color:#00ff88;
-    }
-    .feature-text {
-      font-size:1rem;
-      opacity:0.85;
+      color:#ddd;
     }
 
     @media(max-width:768px){
-      .hero h1 { font-size:2.5rem; letter-spacing:5px; }
-      .about-title { font-size:2.2rem; }
+      .hero h1 { font-size:3rem; letter-spacing:4px; }
+      .hero p { font-size:1rem; }
     }
   </style>
 </head>
@@ -177,42 +119,12 @@
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="memegallery.html">Meme Gallery</a></li>
-      <li><a href="about.html">About</a></li>
     </ul>
   </header>
 
   <section class="hero">
-    <h1>About PRISMO</h1>
-    <p>The prism that bends light into infinite possibilities of memes, art, and chaos.</p>
-  </section>
-
-  <section class="about-section">
-    <h2 class="about-title">What is $PRISMO?</h2>
-    <p class="about-description">
-      $PRISMO is not just a meme coin—it’s a prism refracting community energy, creativity, and humor into countless directions. 
-      With PRISMO as our mascot, we aim to light up the blockchain with color, joy, and chaos.  
-      <br><br>
-      Our movement isn’t about charts and lines—it’s about splitting light into memes, contests, NFTs, and projects powered by the community. 
-      Every holder is part of the light, and together we create something unforgettable.
-    </p>
-  </section>
-
-  <section class="about-bottom">
-    <h2>Why Join the Prism?</h2>
-    <div class="features">
-      <div class="feature-box">
-        <h3 class="feature-title">🌈 Creativity Unleashed</h3>
-        <p class="feature-text">A community canvas where memes, art, and wild ideas shine.</p>
-      </div>
-      <div class="feature-box">
-        <h3 class="feature-title">⚡ Community Power</h3>
-        <p class="feature-text">Every holder helps shape the prism’s direction and intensity.</p>
-      </div>
-      <div class="feature-box">
-        <h3 class="feature-title">✨ Infinite Fun</h3>
-        <p class="feature-text">Chaos, contests, drops, and radiant energy that never fades.</p>
-      </div>
-    </div>
+    <h1>PRISMO</h1>
+    <p>Bending light into infinite possibilities of memes, art, and chaos</p>
   </section>
 </body>
 </html>
