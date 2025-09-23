@@ -26,7 +26,7 @@
       justify-content:center; 
     }
     
-    .intro img { 
+    .intro video { 
       position:absolute; 
       top:0; 
       left:0; 
@@ -34,7 +34,6 @@
       height:100%; 
       object-fit:cover; 
       z-index:0;
-      animation: magicalZoom 8s ease-out forwards;
     }
     
     .overlay { 
@@ -331,7 +330,9 @@
 </head>
 <body>
   <section class="intro">
-    <img id="introImage" src="images/45B57BA0-FB5C-41FD-9FC9-CAA7FB801E0C.webp" alt="PRISMO">
+    <video id="introVideo" autoplay muted playsinline>
+      <source src="images/grok-video-a4274718-48e7-4a6b-b712-c4f1ff55dc72 (2).mp4" type="video/mp4">
+    </video>
     <div class="overlay"></div>
     <div class="intro-content">
       <h1 id="introTitle" class="intro-title">PRISMO</h1>
@@ -351,14 +352,14 @@
   </section>
 
   <script>
-    const introImage = document.getElementById('introImage');
+    const introVideo = document.getElementById('introVideo');
     const introTitle = document.getElementById('introTitle');
     const buttonGroup = document.getElementById('buttonGroup');
     const caBar = document.getElementById('caBar');
     const enterPrismBtn = document.getElementById('enterPrismBtn');
 
-    // Start content reveal after zoom animation completes (8 seconds)
-    setTimeout(() => {
+    // Show content after video ends
+    introVideo.addEventListener('ended', () => {
       // Title appears first with majestic fade
       introTitle.style.display = 'block';
       introTitle.style.animation = 'titleMajesticFadeIn 2s ease-out forwards';
@@ -380,7 +381,7 @@
         enterPrismBtn.style.display = 'block';
         enterPrismBtn.style.animation = 'majesticFadeIn 1.8s ease-out forwards, pulse 2s infinite 2s';
       }, 2000);
-    }, 8000); // Wait for zoom animation to complete
+    });
 
     // Copy CA function
     function copyCA() {
@@ -396,6 +397,29 @@
       }).catch(() => {
         alert("CA copied to clipboard!");
       });
+    }
+
+    // Fallback for autoplay issues
+    if (introVideo.paused) {
+      setTimeout(() => {
+        introTitle.style.display = 'block';
+        introTitle.style.animation = 'titleMajesticFadeIn 2s ease-out forwards';
+        
+        setTimeout(() => {
+          buttonGroup.style.display = 'flex';
+          buttonGroup.style.animation = 'majesticFadeIn 1.5s ease-out forwards';
+        }, 800);
+        
+        setTimeout(() => {
+          caBar.style.display = 'flex';
+          caBar.style.animation = 'majesticFadeIn 1.5s ease-out forwards';
+        }, 1400);
+        
+        setTimeout(() => {
+          enterPrismBtn.style.display = 'block';
+          enterPrismBtn.style.animation = 'majesticFadeIn 1.8s ease-out forwards, pulse 2s infinite 2s';
+        }, 2000);
+      }, 3000);
     }
   </script>
 </body>
