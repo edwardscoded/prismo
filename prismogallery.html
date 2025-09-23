@@ -8,257 +8,119 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin:0;
-      font-family:'Poppins',sans-serif;
-      background: radial-gradient(circle at top, #0a0a0f, #000000);
-      color:white;
-      overflow-x:hidden;
-      scroll-behavior: smooth;
-    }
+    body { margin:0; font-family:'Poppins',sans-serif; background:#0f0f1a; color:white; overflow-x:hidden; }
 
-    /* NAVIGATION */
     header {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 50px;
-      background: rgba(0,0,0,0.75);
-      backdrop-filter: blur(8px);
-      z-index: 100;
-      transition: background 0.3s, box-shadow 0.3s;
-    }
-    header.scrolled {
-      background: rgba(0,0,0,0.9);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      position:fixed; top:0; left:0; width:100%; height:80px;
+      display:flex; align-items:center; justify-content:space-between;
+      background:rgba(0,0,0,0.7); z-index:10; padding:0 40px;
     }
     .logo {
-      font-weight: 900;
-      font-size: 1.6rem;
-      color: #00ff88;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      font-size:1.5rem; font-weight:800; color:#00ff88; letter-spacing:2px;
     }
-    .nav-links {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: 40px;
-      margin: 0;
-      padding: 0;
-    }
+    .nav-links { list-style:none; display:flex; gap:30px; }
     .nav-links a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      position: relative;
-      transition: color 0.3s;
+      color:white; text-decoration:none; font-weight:600; font-size:1.1rem;
+      transition:color 0.3s ease;
     }
-    .nav-links a::after {
-      content:'';
-      position:absolute;
-      left:0;
-      bottom:-6px;
-      width:0;
-      height:2px;
-      background:#00ff88;
-      transition: width 0.3s;
+    .nav-links a:hover { color:#00ff88; }
+
+    .hero {
+      position:relative; height:100vh; display:flex;
+      align-items:center; justify-content:center;
+      background:url('images/DF6EC509-F237-4033-984E-BF3EE1E5007B.jpg') no-repeat center center/cover;
     }
-    .nav-links a:hover {
-      color:#00ff88;
-    }
-    .nav-links a:hover::after {
-      width:100%;
+    .hero-content { text-align:center; z-index:2; }
+    .hero h1 {
+      font-size:6rem; font-weight:900; color:#fff;
+      text-shadow:0 0 20px rgba(0,255,136,0.8), 0 0 40px rgba(0,255,136,0.6);
     }
 
-    /* HERO */
-    .intro {
-      height:100vh;
-      background:url("images/DF6EC509-F237-4033-984E-BF3EE1E5007B.jpg") center/cover no-repeat;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      position:relative;
-    }
-    .intro::after {
-      content:'';
-      position:absolute;
-      top:0; left:0; right:0; bottom:0;
-      background:rgba(0,0,0,0.45);
-    }
-    .intro h1 {
-      position:relative;
-      font-size:6rem;
-      font-weight:900;
-      letter-spacing:10px;
-      color:#fff;
-      text-shadow:0 0 40px rgba(0,255,136,0.9);
-      z-index:1;
-      margin:0;
-      transform: translateY(-80px);
-    }
-
-    /* GALLERY */
     .gallery-section {
-      padding:120px 20px;
-      max-width:1200px;
-      margin:0 auto;
-      text-align:center;
-      opacity:0;
-      transform: translateY(50px);
-      transition: all 1s ease;
-    }
-    .gallery-section.visible {
-      opacity:1;
-      transform: translateY(0);
+      padding:120px 20px; max-width:1200px; margin:0 auto; text-align:center;
     }
     .gallery-title {
-      font-size:3rem;
-      font-weight:900;
-      margin-bottom:60px;
-      color:#00ff88;
-      text-shadow:0 0 20px rgba(0,255,136,0.6);
+      font-size:3rem; font-weight:900; margin-bottom:60px;
+      text-shadow:0 0 20px rgba(0,255,136,0.7);
     }
     .gallery-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
       gap:30px;
     }
     .meme-card {
-      background:rgba(255,255,255,0.05);
-      padding:20px;
-      border-radius:12px;
-      text-align:center;
-      transition:transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
+      background:rgba(255,255,255,0.05); padding:20px; border-radius:12px;
+      text-align:center; transition:transform 0.3s ease; cursor:pointer;
     }
-    .meme-card:hover {
-      transform:translateY(-8px) scale(1.02);
-      box-shadow:0 0 25px rgba(0,255,136,0.5);
-    }
+    .meme-card:hover { transform:translateY(-8px); }
     .meme-card img {
-      max-width:100%;
-      border-radius:8px;
-      margin-bottom:15px;
+      max-width:100%; border-radius:8px; margin-bottom:15px;
     }
 
-    /* LIGHTBOX */
+    /* Lightbox */
     .lightbox {
-      position: fixed;
-      top:0; left:0;
-      width:100%; height:100%;
-      background: rgba(0,0,0,0.9);
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      z-index:200;
-      visibility:hidden;
-      opacity:0;
-      transition:opacity 0.3s ease;
-    }
-    .lightbox.active {
-      visibility:visible;
-      opacity:1;
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.9); display:none;
+      align-items:center; justify-content:center;
+      z-index:100;
+      flex-direction:column;
     }
     .lightbox img {
-      max-width:90%;
-      max-height:90%;
-      border-radius:12px;
-      box-shadow:0 0 30px rgba(0,255,136,0.7);
+      max-width:90%; max-height:80%; border-radius:12px;
     }
-    .lightbox-close {
-      position:absolute;
-      top:30px;
-      right:40px;
-      font-size:2rem;
-      color:#fff;
-      cursor:pointer;
+    .lightbox:target { display:flex; }
+
+    .close-btn {
+      position:absolute; top:20px; right:30px;
+      font-size:2rem; color:#fff; text-decoration:none;
+      font-weight:900; transition:color 0.3s ease;
     }
+    .close-btn:hover { color:#00ff88; }
   </style>
 </head>
 <body>
-<header id="mainHeader">
-  <div class="logo">PRISMO</div>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="prismogallery.html">Prismo Gallery</a></li>
-    <li><a href="about.html">About</a></li>
-  </ul>
-</header>
+  <header id="mainHeader">
+    <div class="logo">PRISMO</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="prismogallery.html">Prismo Gallery</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </header>
 
-
-  <section class="intro">
-    <h1>PRISMO GALLERY</h1>
-  </section>
-
-  <section id="gallery" class="gallery-section">
-    <h2 class="gallery-title">The Spectrum of PRISMO</h2>
-    <div class="gallery-grid">
-      <div class="meme-card"><img src="images/E99B279C-BBFF-433C-867A-2BAAE76E9045.png" alt="Prismo Image 1"></div>
-      <div class="meme-card"><img src="images/DF6EC509-F237-4033-984E-BF3EE1E5007B.jpg" alt="Prismo Image 2"></div>
-      <div class="meme-card"><img src="images/D0F5AA99-EDBA-4CA2-8865-B3CE4ACCC41B.png" alt="Prismo Image 3"></div>
-      <div class="meme-card"><img src="images/B40C5075-2070-4B7C-9055-CBE28822B840.webp" alt="Prismo Image 4"></div>
-      <div class="meme-card"><img src="images/AF5A7543-139A-4A3E-8D15-BAC539C9B8BB.webp" alt="Prismo Image 5"></div>
+  <section class="hero">
+    <div class="hero-content">
+      <h1>PRISMO GALLERY</h1>
     </div>
   </section>
 
-  <!-- Lightbox -->
-  <div id="lightbox" class="lightbox">
-    <span class="lightbox-close">&times;</span>
-    <img id="lightboxImg" src="" alt="Expanded Prismo">
-  </div>
+  <section id="gallery" class="gallery-section">
+    <h2 class="gallery-title">Explore the Prismo Gallery</h2>
+    <div class="gallery-grid">
+      <a href="#img1" class="meme-card"><img src="images/E99B279C-BBFF-433C-867A-2BAAE76E9045.png" alt="Prismo Meme 1"></a>
+      <a href="#img2" class="meme-card"><img src="images/DF6EC509-F237-4033-984E-BF3EE1E5007B.jpg" alt="Prismo Meme 2"></a>
+      <a href="#img3" class="meme-card"><img src="images/D0F5AA99-EDBA-4CA2-8865-B3CE4ACCC41B.png" alt="Prismo Meme 3"></a>
+      <a href="#img4" class="meme-card"><img src="images/B40C5075-2070-4B7C-9055-CBE28822B840.webp" alt="Prismo Meme 4"></a>
+      <a href="#img5" class="meme-card"><img src="images/AF5A7543-139A-4A3E-8D15-BAC539C9B8BB.webp" alt="Prismo Meme 5"></a>
+      <a href="#img6" class="meme-card"><img src="images/78B75B49-13DA-49C0-AE37-4E9F43AA9348.webp" alt="Prismo Meme 6"></a>
+      <a href="#img7" class="meme-card"><img src="images/45B57BA0-FB5C-41FD-9FC9-CAA7FB801E0C.webp" alt="Prismo Meme 7"></a>
+      <a href="#img8" class="meme-card"><img src="images/4113DDA5-4897-4BC0-9438-EF7C64F56F5E.webp" alt="Prismo Meme 8"></a>
+      <a href="#img9" class="meme-card"><img src="images/35565A88-8E02-481B-8CC6-2073AE7797C1.webp" alt="Prismo Meme 9"></a>
+      <a href="#img10" class="meme-card"><img src="images/20E0B872-433F-4852-A5CF-6A7962334FFB.jpg" alt="Prismo Meme 10"></a>
+      <a href="#img11" class="meme-card"><img src="images/13D46BBA-32A5-4AB7-B575-5218B6326F56.png" alt="Prismo Meme 11"></a>
+    </div>
+  </section>
 
-  <script>
-    // Shrink nav on scroll
-    const header = document.getElementById('mainHeader');
-    window.addEventListener('scroll', () => {
-      if(window.scrollY > 50){
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
-
-    // Reveal gallery on scroll
-    const revealSections = () => {
-      document.querySelectorAll('.gallery-section').forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if(rect.top < window.innerHeight - 100){
-          section.classList.add('visible');
-        }
-      });
-    };
-    window.addEventListener('scroll', revealSections);
-    window.addEventListener('load', revealSections);
-
-    // Lightbox functionality
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
-    const closeBtn = document.querySelector('.lightbox-close');
-
-    document.querySelectorAll('.meme-card img').forEach(img => {
-      img.addEventListener('click', () => {
-        lightboxImg.src = img.src;
-        lightbox.classList.add('active');
-      });
-    });
-
-    closeBtn.addEventListener('click', () => {
-      lightbox.classList.remove('active');
-    });
-
-    lightbox.addEventListener('click', (e) => {
-      if(e.target === lightbox){
-        lightbox.classList.remove('active');
-      }
-    });
-  </script>
+  <!-- Lightboxes -->
+  <div id="img1" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/E99B279C-BBFF-433C-867A-2BAAE76E9045.png" alt=""></div>
+  <div id="img2" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/DF6EC509-F237-4033-984E-BF3EE1E5007B.jpg" alt=""></div>
+  <div id="img3" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/D0F5AA99-EDBA-4CA2-8865-B3CE4ACCC41B.png" alt=""></div>
+  <div id="img4" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/B40C5075-2070-4B7C-9055-CBE28822B840.webp" alt=""></div>
+  <div id="img5" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/AF5A7543-139A-4A3E-8D15-BAC539C9B8BB.webp" alt=""></div>
+  <div id="img6" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/78B75B49-13DA-49C0-AE37-4E9F43AA9348.webp" alt=""></div>
+  <div id="img7" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/45B57BA0-FB5C-41FD-9FC9-CAA7FB801E0C.webp" alt=""></div>
+  <div id="img8" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/4113DDA5-4897-4BC0-9438-EF7C64F56F5E.webp" alt=""></div>
+  <div id="img9" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/35565A88-8E02-481B-8CC6-2073AE7797C1.webp" alt=""></div>
+  <div id="img10" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/20E0B872-433F-4852-A5CF-6A7962334FFB.jpg" alt=""></div>
+  <div id="img11" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/13D46BBA-32A5-4AB7-B575-5218B6326F56.png" alt=""></div>
 </body>
 </html>
