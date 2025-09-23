@@ -3,215 +3,216 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PRISMO – Light, Laughs, & Chaos</title>
+  <title>About PRISMO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg-dark: #1a0f30;
-      --bg-dark2: #2a1d47;
-      --accent: #ffd700;
-      --accent2: #00ffff;
-      --text-light: #f0f0f0;
-      --glow-color: rgba(255, 215, 0, 0.6);
+    body { 
+      margin:0; 
+      font-family:'Poppins',sans-serif; 
+      background:#2a1d47; 
+      color:white; 
+      overflow-x:hidden; 
     }
-    body {
-      margin: 0;
-      scroll-behavior: smooth;
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-light);
-    }
+
+    /* NAVIGATION */
     header {
       position: fixed;
       top: 0; left: 0;
       width: 100%;
-      padding: 20px 40px;
+      height: 80px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      z-index: 100;
-      transition: background 0.3s, padding 0.3s;
-    }
-    header.shrink {
-      background: var(--bg-dark2);
-      padding: 10px 40px;
+      justify-content: space-between;
+      padding: 0 40px;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      z-index: 10;
     }
     .logo {
-      font-size: 1.8rem;
       font-weight: 900;
-      color: var(--accent);
+      font-size: 1.5rem;
+      color: #00ff88;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      letter-spacing: 2px;
     }
     .nav-links {
+      list-style: none;
       display: flex;
       gap: 30px;
+      margin: 0;
+      padding: 0;
     }
     .nav-links a {
-      color: var(--text-light);
+      color: white;
       text-decoration: none;
       font-weight: 600;
+      font-size: 1rem;
       position: relative;
+      transition: color 0.3s;
     }
     .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      height: 2px;
-      width: 0;
-      background: var(--accent);
-      transition: width 0.3s;
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:-5px;
+      width:0;
+      height:2px;
+      background:#00ff88;
+      transition:width 0.3s;
+    }
+    .nav-links a:hover {
+      color:#00ff88;
     }
     .nav-links a:hover::after {
-      width: 100%;
+      width:100%;
     }
+
+    /* HERO */
     .hero {
-      height: 100vh;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      background: url('images/20E0B872-433F-4852-A5CF-6A7962334FFB.jpg') center/cover no-repeat;
+      height:100vh;
+      background:url("images/20E0B872-433F-4852-A5CF-6A7962334FFB.jpg") center/cover no-repeat;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:0 20px;
+      position:relative;
     }
-    .hero .overlay {
-      position: absolute;
-      top:0; left:0;
-      width:100%; height:100%;
-      background: linear-gradient( rgba(26,15,48,0.6), rgba(42,29,71,0.6) );
-      z-index: 1;
+    .hero::after {
+      content:'';
+      position:absolute;
+      top:0; left:0; right:0; bottom:0;
+      background:rgba(0,0,0,0.4);
     }
     .hero h1 {
-      position: relative;
-      z-index: 2;
-      font-size: 4rem;
-      font-weight: 900;
-      color: var(--accent);
-      text-shadow: 0 0 20px var(--accent);
+      position:relative;
+      font-size:4rem;
+      font-weight:900;
+      letter-spacing:10px;
+      color:#fff;
+      text-shadow:0 0 25px rgba(0,255,136,0.8);
+      z-index:1;
     }
-    .hero .cta-btn {
-      position: relative;
-      z-index: 2;
-      margin-top: 30px;
-      padding: 15px 40px;
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--bg-dark);
-      background: var(--accent);
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: transform 0.3s, background 0.3s;
+    .hero p {
+      position:relative;
+      font-size:1.3rem;
+      font-weight:500;
+      margin-top:20px;
+      max-width:800px;
+      z-index:1;
     }
-    .hero .cta-btn:hover {
-      transform: scale(1.05);
-      background: var(--accent2);
+
+    /* ABOUT MAIN SECTION */
+    .about-section {
+      padding:120px 20px;
+      max-width:1000px;
+      margin:0 auto;
+      text-align:center;
     }
-    section.features {
-      padding: 100px 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 40px;
+    .about-title {
+      font-size:3rem;
+      font-weight:900;
+      margin-bottom:30px;
+      color:#00ff88;
+      text-shadow:0 0 15px rgba(0,255,136,0.5);
     }
-    .feature {
-      background: var(--bg-dark2);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px;
-      padding: 30px;
-      transition: transform 0.3s;
+    .about-description {
+      font-size:1.2rem;
+      line-height:1.8;
+      opacity:0.95;
     }
-    .feature:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+
+    /* BOTTOM SECTION */
+    .about-bottom {
+      background:#1c1234;
+      padding:100px 20px;
+      text-align:center;
     }
-    .feature img {
-      max-width: 100%;
-      border-radius: 12px;
-      margin-bottom: 20px;
+    .about-bottom h2 {
+      font-size:2.5rem;
+      font-weight:800;
+      margin-bottom:20px;
+      color:#00ff88;
+      text-shadow:0 0 15px rgba(0,255,136,0.5);
+    }
+    .features {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+      gap:30px;
+      margin-top:50px;
+    }
+    .feature-box {
+      background:rgba(255,255,255,0.05);
+      border-radius:12px;
+      padding:30px;
+      transition:transform 0.3s;
+    }
+    .feature-box:hover {
+      transform:translateY(-8px);
+      box-shadow:0 0 25px rgba(0,255,136,0.3);
     }
     .feature-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 10px;
+      font-size:1.4rem;
+      font-weight:700;
+      margin-bottom:15px;
+      color:#00ff88;
     }
     .feature-text {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: var(--text-light);
-      opacity: 0.9;
+      font-size:1rem;
+      opacity:0.85;
     }
-    /* Additional sections, footer etc... */
+
+    @media(max-width:768px){
+      .hero h1 { font-size:2.5rem; letter-spacing:5px; }
+      .about-title { font-size:2.2rem; }
+    }
   </style>
 </head>
 <body>
-  <header id="mainHeader">
+  <header>
     <div class="logo">PRISMO</div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-      </ul>
-    </nav>
-    <div class="social-links">
-      <a href="#">🐦</a>
-      <a href="#">💬</a>
-    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="memegallery.html">Meme Gallery</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
   </header>
 
-  <section id="hero" class="hero">
-    <div class="overlay"></div>
-    <div class="hero-content">
-      <h1>Enter the Prism</h1>
-      <button class="cta-btn">Join the Light</button>
-    </div>
+  <section class="hero">
+    <h1>About PRISMO</h1>
+    <p>The prism that bends light into infinite possibilities of memes, art, and chaos.</p>
   </section>
 
-  <section id="features" class="features">
-    <div class="feature">
-      <img src="images/your-icon1.png" alt="Creativity Icon">
-      <h2 class="feature-title">Creativity Unleashed</h2>
-      <p class="feature-text">Memes, art, and ideas come alive in our community—PRISMO is your canvas.</p>
-    </div>
-    <div class="feature">
-      <img src="images/your-icon2.png" alt="Community Icon">
-      <h2 class="feature-title">Community Power</h2>
-      <p class="feature-text">You’re more than a holder—you’re part of PRISMO’s movement, your voice matters.</p>
-    </div>
-    <div class="feature">
-      <img src="images/your-icon3.png" alt="Fun Icon">
-      <h2 class="feature-title">Infinite Fun</h2>
-      <p class="feature-text">Contests, drops, chaos, light—PRISMO never stops glowing.</p>
-    </div>
+  <section class="about-section">
+    <h2 class="about-title">What is $PRISMO?</h2>
+    <p class="about-description">
+      $PRISMO is not just a meme coin—it’s a prism refracting community energy, creativity, and humor into countless directions. 
+      With PRISMO as our mascot, we aim to light up the blockchain with color, joy, and chaos.  
+      <br><br>
+      Our movement isn’t about charts and lines—it’s about splitting light into memes, contests, NFTs, and projects powered by the community. 
+      Every holder is part of the light, and together we create something unforgettable.
+    </p>
   </section>
 
-  <section id="about" class="about-section">
-    <div class="about-inner" style="max-width:800px; margin: 0 auto; padding: 80px 20px;">
-      <h2 style="font-size:2.8rem; font-weight:900; color:var(--accent)">What is $PRISMO?</h2>
-      <p style="font-size:1.15rem; line-height:1.8; color:var(--text-light); opacity:0.95;">
-        $PRISMO isn’t just a meme coin—it’s the light refracted by imagination. We blend art, humor, community, and chaos to build something colorful and alive… etc.
-      </p>
+  <section class="about-bottom">
+    <h2>Why Join the Prism?</h2>
+    <div class="features">
+      <div class="feature-box">
+        <h3 class="feature-title">🌈 Creativity Unleashed</h3>
+        <p class="feature-text">A community canvas where memes, art, and wild ideas shine.</p>
+      </div>
+      <div class="feature-box">
+        <h3 class="feature-title">⚡ Community Power</h3>
+        <p class="feature-text">Every holder helps shape the prism’s direction and intensity.</p>
+      </div>
+      <div class="feature-box">
+        <h3 class="feature-title">✨ Infinite Fun</h3>
+        <p class="feature-text">Chaos, contests, drops, and radiant energy that never fades.</p>
+      </div>
     </div>
   </section>
-
-  <!-- add more sections like gallery, roadmap, etc. using similar style -->
-
-  <script>
-    // make header shrink on scroll
-    const header = document.getElementById('mainHeader');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('shrink');
-      } else {
-        header.classList.remove('shrink');
-      }
-    });
-  </script>
 </body>
 </html>
