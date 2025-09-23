@@ -14,6 +14,7 @@
       background:#2a1d47;
       color:white;
       overflow-x:hidden;
+      scroll-behavior: smooth;
     }
 
     /* NAVIGATION */
@@ -25,14 +26,19 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 40px;
+      padding: 0 50px;
       background: rgba(0,0,0,0.75);
       backdrop-filter: blur(8px);
       z-index: 100;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    header.scrolled {
+      background: rgba(0,0,0,0.9);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
     .logo {
       font-weight: 900;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       color: #00ff88;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -40,7 +46,8 @@
     .nav-links {
       list-style: none;
       display: flex;
-      gap: 30px;
+      align-items: center;
+      gap: 40px;
       margin: 0;
       padding: 0;
     }
@@ -56,11 +63,11 @@
       content:'';
       position:absolute;
       left:0;
-      bottom:-5px;
+      bottom:-6px;
       width:0;
       height:2px;
       background:#00ff88;
-      transition:width 0.3s;
+      transition: width 0.3s;
     }
     .nav-links a:hover {
       color:#00ff88;
@@ -107,18 +114,94 @@
       color:#ddd;
     }
 
+    /* ABOUT SECTION */
+    .about-section {
+      padding:120px 20px;
+      max-width:1000px;
+      margin:0 auto;
+      text-align:center;
+      opacity:0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+    .about-section.visible {
+      opacity:1;
+      transform: translateY(0);
+    }
+    .about-title {
+      font-size:3rem;
+      font-weight:900;
+      margin-bottom:30px;
+      color:#00ff88;
+      text-shadow:0 0 15px rgba(0,255,136,0.5);
+    }
+    .about-description {
+      font-size:1.2rem;
+      line-height:1.8;
+      opacity:0.95;
+    }
+
+    /* BOTTOM FEATURES */
+    .about-bottom {
+      background:#1c1234;
+      padding:100px 20px;
+      text-align:center;
+      opacity:0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+    .about-bottom.visible {
+      opacity:1;
+      transform: translateY(0);
+    }
+    .about-bottom h2 {
+      font-size:2.5rem;
+      font-weight:800;
+      margin-bottom:20px;
+      color:#00ff88;
+      text-shadow:0 0 15px rgba(0,255,136,0.5);
+    }
+    .features {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+      gap:30px;
+      margin-top:50px;
+    }
+    .feature-box {
+      background:rgba(255,255,255,0.05);
+      border-radius:12px;
+      padding:30px;
+      transition:transform 0.3s;
+    }
+    .feature-box:hover {
+      transform:translateY(-8px);
+      box-shadow:0 0 25px rgba(0,255,136,0.3);
+    }
+    .feature-title {
+      font-size:1.4rem;
+      font-weight:700;
+      margin-bottom:15px;
+      color:#00ff88;
+    }
+    .feature-text {
+      font-size:1rem;
+      opacity:0.85;
+    }
+
     @media(max-width:768px){
       .hero h1 { font-size:3rem; letter-spacing:4px; }
       .hero p { font-size:1rem; }
+      .about-title { font-size:2.2rem; }
     }
   </style>
 </head>
 <body>
-  <header>
+  <header id="mainHeader">
     <div class="logo">PRISMO</div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="memegallery.html">Meme Gallery</a></li>
+      <li><a href="about.html">About</a></li>
     </ul>
   </header>
 
@@ -126,5 +209,58 @@
     <h1>PRISMO</h1>
     <p>Bending light into infinite possibilities of memes, art, and chaos</p>
   </section>
+
+  <section id="aboutSection" class="about-section">
+    <h2 class="about-title">What is $PRISMO?</h2>
+    <p class="about-description">
+      $PRISMO is more than a meme coin—it’s a living prism of culture, humor, and creativity.  
+      Inspired by its radiant mascot, PRISMO splits community energy into infinite rays: art, memes, contests, NFTs, and chaos.  
+      <br><br>
+      Holding $PRISMO means joining a movement that lights up the blockchain with joy and unpredictability.  
+      Together, we bend light into unforgettable shapes.
+    </p>
+  </section>
+
+  <section id="features" class="about-bottom">
+    <h2>Why Join the Prism?</h2>
+    <div class="features">
+      <div class="feature-box">
+        <h3 class="feature-title">🌈 Creativity Unleashed</h3>
+        <p class="feature-text">A canvas for memes, art, and innovation.</p>
+      </div>
+      <div class="feature-box">
+        <h3 class="feature-title">⚡ Community Power</h3>
+        <p class="feature-text">Every holder is a shard of light, shaping PRISMO’s path.</p>
+      </div>
+      <div class="feature-box">
+        <h3 class="feature-title">✨ Infinite Fun</h3>
+        <p class="feature-text">Chaos, contests, NFTs, and radiant energy that never fades.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Shrink nav on scroll
+    const header = document.getElementById('mainHeader');
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 50){
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Reveal sections on scroll
+    const revealSections = () => {
+      document.querySelectorAll('.about-section, .about-bottom').forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if(rect.top < window.innerHeight - 100){
+          section.classList.add('visible');
+        }
+      });
+    };
+    window.addEventListener('scroll', revealSections);
+    window.addEventListener('load', revealSections);
+  </script>
 </body>
 </html>
