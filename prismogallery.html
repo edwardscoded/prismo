@@ -908,10 +908,18 @@
   <script>
     // Close lightbox function
     function closeLightbox() {
-      // Remove the hash from URL without scrolling
+      // Hide all lightboxes
+      document.querySelectorAll('.lightbox').forEach(lightbox => {
+        lightbox.style.display = 'none';
+      });
+      
+      // Remove hash from URL without scrolling
       if (window.history && window.history.replaceState) {
-        window.history.replaceState({}, document.title, window.location.pathname);
+        window.history.replaceState({}, document.title, window.location.pathname + window.location.search);
       }
+      
+      // Re-enable body scroll
+      document.body.style.overflow = 'auto';
     }
 
     // Share to X function
@@ -925,22 +933,31 @@
       window.open(shareUrl, '_blank', 'width=550,height=420');
     }
 
-    // Close lightbox when clicking outside image
-    document.querySelectorAll('.lightbox').forEach(lightbox => {
-      lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
+    // Handle lightbox opening and closing
+    document.addEventListener('DOMContentLoaded', () => {
+      // Close lightbox when clicking outside image or on close button
+      document.querySelectorAll('.lightbox').forEach(lightbox => {
+        lightbox.addEventListener('click', (e) => {
+          if (e.target === lightbox || e.target.classList.contains('close-btn')) {
+            e.preventDefault();
+            closeLightbox();
+          }
+        });
+      });
+
+      // Handle hash changes for lightbox
+      window.addEventListener('hashchange', () => {
+        if (window.location.hash && window.location.hash.startsWith('#img')) {
+          document.body.style.overflow = 'hidden';
+        }
+      });
+
+      // Add escape key to close lightbox
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
           closeLightbox();
         }
       });
-    });
-
-    // Prevent body scroll when lightbox is open
-    window.addEventListener('hashchange', () => {
-      if (window.location.hash && window.location.hash.startsWith('#img')) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = 'auto';
-      }
     });
 
     // Gallery filtering functionality
