@@ -51,7 +51,7 @@
       z-index:2; 
       text-align:center; 
       max-width: 90%;
-      transform: translateY(-100px);
+      transform: translateY(-50px);
     }
 
     .intro-title { 
@@ -100,6 +100,7 @@
         0 5px 15px rgba(0,0,0,0.2);
       position: relative;
       overflow: hidden;
+      display: inline-block;
     }
     
     .btn::before {
@@ -163,23 +164,29 @@
       box-shadow: 0 0 20px rgba(52,152,219,0.5);
     }
 
+    .enter-prism-container {
+      margin-top: 80px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
     .enter-prism-btn {
-      margin-top: 60px;
       background: linear-gradient(135deg, #00ff88, #00cc70);
       color: #1a1a1a;
-      padding: 25px 60px;
+      padding: 30px 80px;
       border: none;
       border-radius: 50px;
-      font-size: 1.6rem;
-      font-weight: 800;
+      font-size: 2rem;
+      font-weight: 900;
       cursor: pointer;
       text-decoration: none;
       text-transform: uppercase;
-      letter-spacing: 3px;
+      letter-spacing: 4px;
       transition: all 0.4s ease;
       box-shadow: 
-        0 0 30px rgba(0,255,136,0.4),
-        0 10px 25px rgba(0,0,0,0.3);
+        0 0 40px rgba(0,255,136,0.5),
+        0 15px 35px rgba(0,0,0,0.4);
       opacity: 0;
       visibility: hidden;
       display: none;
@@ -205,53 +212,10 @@
 
     .enter-prism-btn:hover {
       background: linear-gradient(135deg, #00ffaa, #00dd88);
-      transform: translateY(-5px) scale(1.05);
+      transform: translateY(-8px) scale(1.08);
       box-shadow: 
-        0 0 40px rgba(0,255,136,0.6),
-        0 15px 35px rgba(0,0,0,0.4);
-    }
-
-    @keyframes magicalZoom {
-      0% { 
-        transform: scale(0.5) rotate(-1deg);
-        opacity: 0.2;
-        filter: blur(12px) brightness(0.3);
-      }
-      25% {
-        opacity: 0.5;
-        filter: blur(8px) brightness(0.5);
-        transform: scale(0.7) rotate(-0.5deg);
-      }
-      50% {
-        transform: scale(0.9) rotate(0deg);
-        opacity: 0.7;
-        filter: blur(4px) brightness(0.7);
-      }
-      75% {
-        transform: scale(1.05) rotate(0deg);
-        opacity: 0.9;
-        filter: blur(2px) brightness(0.85);
-      }
-      100% { 
-        transform: scale(1.1) rotate(0deg);
-        opacity: 1;
-        filter: blur(0px) brightness(1);
-      }
-    }
-
-    @keyframes majesticFadeIn {
-      0% { 
-        opacity: 0; 
-        transform: translateY(80px) scale(0.8); 
-      }
-      50% {
-        opacity: 0.8;
-        transform: translateY(20px) scale(0.95);
-      }
-      100% { 
-        opacity: 1; 
-        transform: translateY(0) scale(1); 
-      }
+        0 0 60px rgba(0,255,136,0.8),
+        0 20px 45px rgba(0,0,0,0.5);
     }
 
     @keyframes titleMajesticFadeIn {
@@ -287,6 +251,21 @@
       }
     }
 
+    @keyframes majesticFadeIn {
+      0% { 
+        opacity: 0; 
+        transform: translateY(80px) scale(0.8); 
+      }
+      50% {
+        opacity: 0.8;
+        transform: translateY(20px) scale(0.95);
+      }
+      100% { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+      }
+    }
+
     @keyframes zoomTransition {
       0% { 
         transform: scale(1); 
@@ -305,17 +284,19 @@
     @keyframes pulse {
       0%, 100% { 
         box-shadow: 
-          0 0 30px rgba(0,255,136,0.4),
-          0 10px 25px rgba(0,0,0,0.3);
+          0 0 40px rgba(0,255,136,0.5),
+          0 15px 35px rgba(0,0,0,0.4);
       }
       50% { 
         box-shadow: 
-          0 0 40px rgba(0,255,136,0.7),
-          0 10px 25px rgba(0,0,0,0.3);
+          0 0 60px rgba(0,255,136,0.8),
+          0 15px 35px rgba(0,0,0,0.4);
       }
     }
+
     /* Responsive Design */
     @media (max-width: 768px) {
+      .intro-title { 
         font-size: 4rem; 
         letter-spacing: 8px; 
       }
@@ -326,10 +307,13 @@
       .ca-bar { 
         font-size: 1rem; 
         padding: 15px 25px; 
+        flex-direction: column;
+        gap: 15px;
       }
       .enter-prism-btn {
-        font-size: 1.1rem;
-        padding: 15px 30px;
+        font-size: 1.4rem;
+        padding: 20px 40px;
+        letter-spacing: 2px;
       }
     }
 
@@ -341,6 +325,10 @@
       .button-group {
         flex-direction: column;
         align-items: center;
+      }
+      .enter-prism-btn {
+        font-size: 1.2rem;
+        padding: 18px 35px;
       }
     }
   </style>
@@ -354,16 +342,16 @@
     <div class="intro-content">
       <h1 id="introTitle" class="intro-title">PRISMO</h1>
       <div id="buttonGroup" class="button-group">
-        <a href="#" class="btn">Follow on X</a>
-        <a href="#" class="btn">Join Community</a>
-        <a href="#" class="btn">Buy on Pump.fun</a>
+        <a href="https://x.com/USERNAME" target="_blank" class="btn">Follow on X</a>
+        <a href="https://x.com/i/communities/COMMUNITYID" target="_blank" class="btn">Join Community</a>
+        <a href="https://pump.fun/coin/CONTRACTADDRESS" target="_blank" class="btn">Buy on Pump.fun</a>
       </div>
       <div id="caBar" class="ca-bar">
         CA: COMING SOON
         <button class="copy-btn" onclick="copyCA()">Copy</button>
       </div>
-      <div style="display: flex; justify-content: center; width: 100%;">
-        <a href="#" id="enterPrismBtn" class="enter-prism-btn" onclick="enterPrism(event)">Enter the Prism</a>
+      <div class="enter-prism-container">
+        <a href="about.html" id="enterPrismBtn" class="enter-prism-btn" onclick="enterPrism(event)">Enter the Prism</a>
       </div>
     </div>
   </section>
@@ -376,7 +364,9 @@
     const enterPrismBtn = document.getElementById('enterPrismBtn');
 
     // Show content after video ends
-    introVideo.addEventListener('ended', () => {
+    introVideo.addEventListener('ended', showContent);
+
+    function showContent() {
       // Title appears first with majestic fade
       introTitle.style.display = 'block';
       introTitle.style.visibility = 'visible';
@@ -398,11 +388,11 @@
       
       // Enter Prism button appears last with pulse
       setTimeout(() => {
-        enterPrismBtn.style.display = 'block';
+        enterPrismBtn.style.display = 'inline-block';
         enterPrismBtn.style.visibility = 'visible';
         enterPrismBtn.style.animation = 'majesticFadeIn 1.8s ease-out forwards, pulse 2s infinite 2s';
       }, 2000);
-    });
+    }
 
     // Enter the Prism zoom transition
     function enterPrism(event) {
@@ -434,32 +424,17 @@
       });
     }
 
-    // Fallback for autoplay issues
-    if (introVideo.paused) {
-      setTimeout(() => {
-        introTitle.style.display = 'block';
-        introTitle.style.visibility = 'visible';
-        introTitle.style.animation = 'titleMajesticFadeIn 2s ease-out forwards';
-        
-        setTimeout(() => {
-          buttonGroup.style.display = 'flex';
-          buttonGroup.style.visibility = 'visible';
-          buttonGroup.style.animation = 'majesticFadeIn 1.5s ease-out forwards';
-        }, 800);
-        
-        setTimeout(() => {
-          caBar.style.display = 'flex';
-          caBar.style.visibility = 'visible';
-          caBar.style.animation = 'majesticFadeIn 1.5s ease-out forwards';
-        }, 1400);
-        
-        setTimeout(() => {
-          enterPrismBtn.style.display = 'block';
-          enterPrismBtn.style.visibility = 'visible';
-          enterPrismBtn.style.animation = 'majesticFadeIn 1.8s ease-out forwards, pulse 2s infinite 2s';
-        }, 2000);
-      }, 3000);
-    }
+    // Fallback for autoplay issues - show content after 3 seconds if video doesn't play
+    setTimeout(() => {
+      if (introVideo.paused || introVideo.currentTime === 0) {
+        showContent();
+      }
+    }, 3000);
+
+    // Also trigger if video fails to load
+    introVideo.addEventListener('error', () => {
+      setTimeout(showContent, 1000);
+    });
   </script>
 </body>
 </html>
