@@ -345,41 +345,95 @@
       z-index: 2000;
       flex-direction: column;
       backdrop-filter: blur(5px);
-    }
-
-    .lightbox img {
-      max-width: 90%; 
-      max-height: 80%; 
-      border-radius: 15px;
-      box-shadow: 0 0 50px rgba(0,255,136,0.3);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
     .lightbox:target { 
       display: flex; 
+      opacity: 1;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 80%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .lightbox img {
+      max-width: 100%; 
+      max-height: 100%; 
+      border-radius: 15px;
+      box-shadow: 0 0 50px rgba(0,255,136,0.3);
+      margin-bottom: 20px;
     }
 
     .close-btn {
       position: absolute; 
-      top: 30px; 
-      right: 40px;
+      top: -50px; 
+      right: 0;
       font-size: 2.5rem; 
       color: #fff; 
       text-decoration: none;
       font-weight: 900; 
       transition: all 0.3s ease;
-      background: rgba(0,0,0,0.5);
-      width: 60px;
-      height: 60px;
+      background: rgba(0,0,0,0.7);
+      width: 50px;
+      height: 50px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
+      border: 2px solid rgba(0,255,136,0.3);
     }
 
     .close-btn:hover { 
       color: #00ff88;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.9);
       transform: scale(1.1);
+      border-color: rgba(0,255,136,0.6);
+    }
+
+    .share-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .share-btn {
+      background: linear-gradient(135deg, #1da1f2, #0d8bd9);
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 5px 15px rgba(29,161,242,0.3);
+    }
+
+    .share-btn:hover {
+      background: linear-gradient(135deg, #0d8bd9, #0a7bc4);
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(29,161,242,0.4);
+    }
+
+    .share-btn::before {
+      content: '𝕏';
+      font-size: 1.1rem;
+      font-weight: 900;
     }
 
     footer {
@@ -584,11 +638,20 @@
       }
 
       .close-btn {
-        top: 20px;
-        right: 20px;
-        font-size: 2rem;
-        width: 50px;
-        height: 50px;
+        top: -40px;
+        right: 0;
+        width: 40px;
+        height: 40px;
+        font-size: 1.8rem;
+      }
+
+      .share-buttons {
+        margin-top: 10px;
+      }
+
+      .share-btn {
+        padding: 10px 20px;
+        font-size: 0.8rem;
       }
     }
 
@@ -723,17 +786,105 @@
   </section>
 
   <!-- Lightboxes -->
-  <div id="img1" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/E99B279C-BBFF-433C-867A-2BAAE76E9045.png" alt=""></div>
-  <div id="img2" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/DF6EC509-F237-4033-984E-BF3EE1E5007B.jpg" alt=""></div>
-  <div id="img3" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/D0F5AA99-EDBA-4CA2-8865-B3CE4ACCC41B.png" alt=""></div>
-  <div id="img4" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/B40C5075-2070-4B7C-9055-CBE28822B840.webp" alt=""></div>
-  <div id="img5" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/AF5A7543-139A-4A3E-8D15-BAC539C9B8BB.webp" alt=""></div>
-  <div id="img6" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/78B75B49-13DA-49C0-AE37-4E9F43AA9348.webp" alt=""></div>
-  <div id="img7" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/45B57BA0-FB5C-41FD-9FC9-CAA7FB801E0C.webp" alt=""></div>
-  <div id="img8" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/4113DDA5-4897-4BC0-9438-EF7C64F56F5E.webp" alt=""></div>
-  <div id="img9" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/35565A88-8E02-481B-8CC6-2073AE7797C1.webp" alt=""></div>
-  <div id="img10" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/20E0B872-433F-4852-A5CF-6A7962334FFB.jpg" alt=""></div>
-  <div id="img11" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/13D46BBA-32A5-4AB7-B575-5218B6326F56.png" alt=""></div>
+  <div id="img1" class="lightbox">
+    <div class="lightbox-content">
+      <button class="close-btn" onclick="closeLightbox()">&times;</button>
+      <img src="images/E99B279C-BBFF-433C-867A-2BAAE76E9045.png" alt="">
+      <div class="share-buttons">
+        <button class="share-btn" onclick="shareToX('images/E99B279C-BBFF-433C-867A-2BAAE76E9045.png', 'Prism Vision - Digital art from the PRISMO universe ✨')">Share on X</button>
+      </div>
+    </div>
+  </div>
+  <div id="img2" class="lightbox">
+    <div class="lightbox-content">
+      <button class="close-btn" onclick="closeLightbox()">&times;</button>
+      <img src="images/DF6EC509-F237-4033-984E-BF3EE1E5007B.jpg" alt="">
+      <div class="share-buttons">
+        <button class="share-btn" onclick="shareToX('images/DF6EC509-F237-4033-984E-BF3EE1E5007B.jpg', 'Cosmic Energy - Following the beam with $PRISMO 🌌')">Share on X</button>
+      </div>
+    </div>
+  </div>
+  <div id="img3" class="lightbox">
+    <div class="lightbox-content">
+      <button class="close-btn" onclick="closeLightbox()">&times;</button>
+      <img src="images/D0F5AA99-EDBA-4CA2-8865-B3CE4ACCC41B.png" alt="">
+      <div class="share-buttons">
+        <button class="share-btn" onclick="shareToX('images/D0F5AA99-EDBA-4CA2-8865-B3CE4ACCC41B.png', 'Meme Magic - Pure chaos energy from $PRISMO 😂')">Share on X</button>
+      </div>
+    </div>
+  </div>
+  <div id="img4" class="lightbox">
+    <div class="lightbox-content">
+      <button class="close-btn" onclick="closeLightbox()">&times;</button>
+      <img src="images/B40C5075-2070-4B7C-9055-CBE28822B840.webp" alt="">
+      <div class="share-buttons">
+        <button class="share-btn" onclick="shareToX('images/B40C5075-2070-4B7C-9055-CBE28822B840.webp', 'Spectrum Art - Refracted reality through the $PRISMO lens 🎨')">Share on X</button>
+      </div>
+    </div>
+  </div>
+  <div id="img5" class="lightbox">
+    <div class="lightbox-content">
+      <button class="close-btn" onclick="closeLightbox()">&times;</button>
+      <img src="images/AF5A7543-139A-4A3E-8D15-BAC539C9B8BB.webp" alt="">
+      <div class="share-buttons">
+        <button class="share-btn" onclick="shareToX('images/AF5A7543-139A-4A3E-8D15-BAC539C9B8BB.webp', 'Dimensional - Beyond space and time with $PRISMO 🚀')">Share on X</button>
+      </div>
+    </div>
+  </div>
+  <div id="img6" class="lightbox">
+    <div class="lightbox-content">
+      <button class="close-btn" onclick="closeLightbox()">&times;</button>
+      <img src="images/78B75B49-13DA-49C0-AE37-4E9F43AA9348.webp" alt="">
+      <div class="share-buttons">
+        <button class="share-btn" onclick="shareToX('images/78B75B49-13DA-49C0-AE37-4E9F43AA9348.webp', 'Community - Beam followers unite! Join the $PRISMO revolution 🌟')">Share on X</button>
+      </div>
+    </div>
+  </div>
+  <div id="img7" class="lightbox">
+    <div class="lightbox-content">
+      <button class="close-btn" onclick="closeLightbox()">&times;</button>
+      <img src="images/45B57BA0-FB5C-41FD-9FC9-CAA7FB801E0C.webp" alt="">
+      <div class="share-buttons">
+        <button class="share-btn" onclick="shareToX('images/45B57BA0-FB5C-41FD-9FC9-CAA7FB801E0C.webp', 'Prismatic - Light bending creation from $PRISMO 🌈')">Share on X</button>
+      </div>
+    </div>
+  </div>
+  <div id="img8" class="lightbox">
+    <div class="lightbox-content">
+      <button class="close-btn" onclick="closeLightbox()">&times;</button>
+      <img src="images/4113DDA5-4897-4BC0-9438-EF7C64F56F5E.webp" alt="">
+      <div class="share-buttons">
+        <button class="share-btn" onclick="shareToX('images/4113DDA5-4897-4BC0-9438-EF7C64F56F5E.webp', 'Infinite - Endless possibilities with $PRISMO ♾️')">Share on X</button>
+      </div>
+    </div>
+  </div>
+  <div id="img9" class="lightbox">
+    <div class="lightbox-content">
+      <button class="close-btn" onclick="closeLightbox()">&times;</button>
+      <img src="images/35565A88-8E02-481B-8CC6-2073AE7797C1.webp" alt="">
+      <div class="share-buttons">
+        <button class="share-btn" onclick="shareToX('images/35565A88-8E02-481B-8CC6-2073AE7797C1.webp', 'Wavelength - On the same frequency as $PRISMO 📡')">Share on X</button>
+      </div>
+    </div>
+  </div>
+  <div id="img10" class="lightbox">
+    <div class="lightbox-content">
+      <button class="close-btn" onclick="closeLightbox()">&times;</button>
+      <img src="images/20E0B872-433F-4852-A5CF-6A7962334FFB.jpg" alt="">
+      <div class="share-buttons">
+        <button class="share-btn" onclick="shareToX('images/20E0B872-433F-4852-A5CF-6A7962334FFB.jpg', 'Portal - Gateway to the $PRISMO dimension 🚪')">Share on X</button>
+      </div>
+    </div>
+  </div>
+  <div id="img11" class="lightbox">
+    <div class="lightbox-content">
+      <button class="close-btn" onclick="closeLightbox()">&times;</button>
+      <img src="images/13D46BBA-32A5-4AB7-B575-5218B6326F56.png" alt="">
+      <div class="share-buttons">
+        <button class="share-btn" onclick="shareToX('images/13D46BBA-32A5-4AB7-B575-5218B6326F56.png', 'Evolution - The next wavelength of $PRISMO 🧬')">Share on X</button>
+      </div>
+    </div>
+  </div>
 
   <footer>
     <div class="footer-content">
@@ -755,6 +906,43 @@
   </footer>
 
   <script>
+    // Close lightbox function
+    function closeLightbox() {
+      // Remove the hash from URL without scrolling
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    }
+
+    // Share to X function
+    function shareToX(imagePath, text) {
+      const websiteUrl = window.location.origin;
+      const fullImageUrl = `${websiteUrl}/${imagePath}`;
+      const tweetText = encodeURIComponent(`${text}\n\n🔗 Check out the full PRISMO Gallery: ${websiteUrl}/prismogallery.html\n\n#PRISMO #FollowTheBeam`);
+      
+      // Open X share dialog
+      const shareUrl = `https://twitter.com/intent/tweet?text=${tweetText}&url=${encodeURIComponent(fullImageUrl)}`;
+      window.open(shareUrl, '_blank', 'width=550,height=420');
+    }
+
+    // Close lightbox when clicking outside image
+    document.querySelectorAll('.lightbox').forEach(lightbox => {
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
+    });
+
+    // Prevent body scroll when lightbox is open
+    window.addEventListener('hashchange', () => {
+      if (window.location.hash && window.location.hash.startsWith('#img')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'auto';
+      }
+    });
+
     // Gallery filtering functionality
     const filterButtons = document.querySelectorAll('.filter-btn');
     const galleryItems = document.querySelectorAll('.meme-card');
