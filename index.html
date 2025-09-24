@@ -11,7 +11,7 @@
     body { 
       margin:0; 
       font-family:'Poppins',sans-serif; 
-      background:#2a1d47; 
+      background:#0f0f1a; 
       color:white; 
       overflow-x:hidden; 
     }
@@ -24,6 +24,47 @@
       display:flex; 
       align-items:center; 
       justify-content:center; 
+    }
+
+    .audio-controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      display: flex;
+      gap: 10px;
+    }
+
+    .audio-btn {
+      background: rgba(0,0,0,0.7);
+      border: 2px solid rgba(0,255,136,0.3);
+      color: #00ff88;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .audio-btn:hover {
+      background: rgba(0,255,136,0.2);
+      border-color: rgba(0,255,136,0.6);
+      transform: scale(1.1);
+    }
+
+    .audio-btn.muted {
+      color: #ff4444;
+      border-color: rgba(255,68,68,0.3);
+    }
+
+    .audio-btn.muted:hover {
+      background: rgba(255,68,68,0.2);
+      border-color: rgba(255,68,68,0.6);
     }
     
     .intro video { 
@@ -342,7 +383,7 @@
     <div class="intro-content">
       <h1 id="introTitle" class="intro-title">PRISMO</h1>
       <div id="buttonGroup" class="button-group">
-        <a href="https://x.com/prismofun" target="_blank" class="btn">Follow on X</a>
+        <a href="https://x.com/USERNAME" target="_blank" class="btn">Follow on X</a>
         <a href="https://x.com/i/communities/COMMUNITYID" target="_blank" class="btn">Join Community</a>
         <a href="https://pump.fun/coin/CONTRACTADDRESS" target="_blank" class="btn">Buy on Pump.fun</a>
       </div>
@@ -362,6 +403,144 @@
     const buttonGroup = document.getElementById('buttonGroup');
     const caBar = document.getElementById('caBar');
     const enterPrismBtn = document.getElementById('enterPrismBtn');
+
+    // Audio system variables
+    let audioContext;
+    let ambientEnabled = false;
+    let effectsEnabled = true;
+    let oscillator;
+    let gainNode;
+
+    // Initialize audio system
+    function initAudio() {
+      try {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        // Create ambient drone sound
+        oscillator = audioContext.createOscillator();
+        gainNode = audioContext.createGain();
+        
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(110, audioContext.currentTime); // Low A note
+        
+        gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.start();
+      } catch (e) {
+        console.log('Audio not supported');
+      }
+    }
+
+    // Play ambient sound
+    function toggleAmbient() {
+      if (!audioContext) initAudio();
+      
+      const ambientBtn = document.getElementById('ambientToggle');
+      
+      if (ambientEnabled) {
+        // Fade out
+        gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 1);
+        ambientBtn.innerHTML = '🔇';
+        ambientBtn.classList.add('muted');
+        ambientEnabled = false;
+      } else {
+        // Fade in
+        gainNode.gain.linearRampToValueAtTime(0.03, audioContext.currentTime + 1);
+        ambientBtn.innerHTML = '🔊';
+        ambientBtn.classList.remove('muted');
+        ambientEnabled = true;
+        
+        // Add subtle frequency modulation for cosmic effect
+        const lfo = audioContext.createOscillator();
+        const lfoGain = audioContext.createGain();
+        lfo.frequency.setValueAtTime(0.1, audioContext.currentTime);
+        lfoGain.gain.setValueAtTime(5, audioContext.currentTime);
+        lfo.connect(lfoGain);
+        lfoGain.connect(oscillator.frequency);
+        lfo.start();
+      }
+    }
+
+    // Toggle sound effects
+    function toggleEffects() {
+      const effectsBtn = document.getElementById('effectsToggle');
+      
+      if (effectsEnabled) {
+        effectsBtn.innerHTML = '🔇';
+        effectsBtn.classList.add('muted');
+        effectsEnabled = false;
+      } else {
+        effectsBtn.innerHTML = '🎵';
+        effectsBtn.classList.remove('muted');
+        effectsEnabled = true;
+      }
+    }
+
+    // Play button hover sound effect
+    function playHoverSound() {
+      if (!effectsEnabled || !audioContext) return;
+      
+      try {
+        const hoverOsc = audioContext.createOscillator();
+        const hoverGain = audioContext.createGain();
+        
+        hoverOsc.type = 'sine';
+        hoverOsc.frequency.setValueAtTime(800, audioContext.currentTime);
+        hoverOsc.frequency.exponentialRampToValueAtTime(1200, audioContext.currentTime + 0.1);
+        
+        hoverGain.gain.setValueAtTime(0.05, audioContext.currentTime);
+        hoverGain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+        
+        hoverOsc.connect(hoverGain);
+        hoverGain.connect(audioContext.destination);
+        
+        hoverOsc.start();
+        hoverOsc.stop(audioContext.currentTime + 0.1);
+      } catch (e) {
+        console.log('Sound effect failed');
+      }
+    }
+
+    // Play button click sound effect
+    function playClickSound() {
+      if (!effectsEnabled || !audioContext) return;
+      
+      try {
+        const clickOsc = audioContext.createOscillator();
+        const clickGain = audioContext.createGain();
+        
+        clickOsc.type = 'square';
+        clickOsc.frequency.setValueAtTime(1200, audioContext.currentTime);
+        clickOsc.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
+        
+        clickGain.gain.setValueAtTime(0.1, audioContext.currentTime);
+        clickGain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+        
+        clickOsc.connect(clickGain);
+        clickGain.connect(audioContext.destination);
+        
+        clickOsc.start();
+        clickOsc.stop(audioContext.currentTime + 0.1);
+      } catch (e) {
+        console.log('Sound effect failed');
+      }
+    }
+
+    // Audio control event listeners
+    document.getElementById('ambientToggle').addEventListener('click', toggleAmbient);
+    document.getElementById('effectsToggle').addEventListener('click', toggleEffects);
+
+    // Add sound effects to buttons
+    document.addEventListener('DOMContentLoaded', () => {
+      // Add hover sounds to all buttons
+      document.querySelectorAll('.btn, .enter-prism-btn, .copy-btn').forEach(btn => {
+        btn.addEventListener('mouseenter', playHoverSound);
+        btn.addEventListener('click', playClickSound);
+      });
+    });
 
     // Show content after video ends
     introVideo.addEventListener('ended', showContent);
@@ -397,6 +576,7 @@
     // Enter the Prism zoom transition
     function enterPrism(event) {
       event.preventDefault();
+      playClickSound();
       
       // Add zoom animation to the entire intro section
       const introSection = document.querySelector('.intro');
@@ -410,6 +590,7 @@
 
     // Copy CA function
     function copyCA() {
+      playClickSound();
       navigator.clipboard.writeText("COMING SOON").then(() => {
         const btn = document.querySelector('.copy-btn');
         const originalText = btn.textContent;
