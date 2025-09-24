@@ -8,150 +8,620 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
-    /* Global fix for overflow */
-    *, *::before, *::after { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body { 
-      margin:0; 
-      font-family:'Poppins',sans-serif; 
-      background:#0f0f1a; 
-      color:white; 
-      overflow-x:hidden; 
+      margin: 0; 
+      font-family: 'Poppins', sans-serif; 
+      background: #0f0f1a; 
+      color: white; 
+      overflow-x: hidden; 
     }
 
     header {
-      position:fixed; 
-      top:0; left:0; 
-      width:100%; 
-      height:80px;
-      display:flex; 
-      align-items:center; 
-      justify-content:space-between;
-      background:rgba(0,0,0,0.7); 
-      z-index:10; 
-      padding:0 40px;
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 80px;
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between;
+      background: rgba(0,0,0,0.9); 
+      backdrop-filter: blur(10px);
+      z-index: 1000; 
+      padding: 0 40px;
+      border-bottom: 1px solid rgba(0,255,136,0.2);
     }
-    .logo {
-      font-size:1.5rem; 
-      font-weight:800; 
-      color:#00ff88; 
-      letter-spacing:2px;
-    }
-    .nav-links { 
-      list-style:none; 
-      display:flex; 
-      gap:30px; 
-      margin:0; 
-      padding:0; 
-    }
-    .nav-links a {
-      color:white; 
-      text-decoration:none; 
-      font-weight:600; 
-      font-size:1.1rem; 
-      transition:color 0.3s ease;
-    }
-    .nav-links a:hover { color:#00ff88; }
 
-    /* Responsive fixes */
-    @media (max-width: 1100px) {
-      header { padding: 0 28px; }
-      .nav-links { gap: 22px; }
-      .nav-links a { font-size: 1rem; }
+    .logo {
+      font-size: 1.5rem; 
+      font-weight: 900; 
+      color: #00ff88; 
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(0,255,136,0.5);
     }
-    @media (max-width: 900px) {
-      header { padding: 0 20px; }
-      .nav-links { gap: 16px; }
-      .nav-links a { font-size: .95rem; }
+
+    .nav-links { 
+      list-style: none; 
+      display: flex; 
+      gap: 30px; 
+      margin: 0; 
+      padding: 0; 
+    }
+
+    .nav-links a {
+      color: white; 
+      text-decoration: none; 
+      font-weight: 600; 
+      font-size: 1.1rem; 
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 5px 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: #00ff88;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #00ff88;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
     }
 
     .hero {
-      position:relative; 
-      height:100vh; 
-      display:flex;
-      align-items:center; 
-      justify-content:center;
-      background:url('images/DF6EC509-F237-4033-984E-BF3EE1E5007B.jpg') no-repeat center center/cover;
+      position: relative; 
+      height: 100vh; 
+      display: flex;
+      align-items: center; 
+      justify-content: center;
+      background: url('images/DF6EC509-F237-4033-984E-BF3EE1E5007B.jpg') no-repeat center center/cover;
+      overflow: hidden;
     }
-    .hero-content { text-align:center; z-index:2; }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 1;
+    }
+
+    .hero-content { 
+      text-align: center; 
+      z-index: 2;
+      position: relative;
+      transform: translateY(-50px);
+    }
+
     .hero h1 {
-      font-size:6rem; 
-      font-weight:900; 
-      color:#fff;
-      text-shadow:0 0 20px rgba(0,255,136,0.8), 0 0 40px rgba(0,255,136,0.6);
+      font-size: 8rem; 
+      font-weight: 900; 
+      letter-spacing: 15px;
+      color: #fff;
+      text-shadow:
+        0 0 30px rgba(0,255,136,0.8),
+        0 0 60px rgba(0,255,136,0.6),
+        0 0 90px rgba(0,255,136,0.4),
+        0 0 120px rgba(0,255,136,0.2);
+      margin-bottom: 0;
+      animation: titleGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes titleGlow {
+      0% {
+        text-shadow:
+          0 0 30px rgba(0,255,136,0.8),
+          0 0 60px rgba(0,255,136,0.6),
+          0 0 90px rgba(0,255,136,0.4);
+      }
+      100% {
+        text-shadow:
+          0 0 40px rgba(0,255,200,1),
+          0 0 80px rgba(0,255,200,0.8),
+          0 0 120px rgba(0,255,200,0.6);
+      }
     }
 
     .gallery-section {
-      padding:120px 20px; 
-      max-width:1200px; 
-      margin:0 auto; 
-      text-align:center;
+      padding: 120px 20px 80px; 
+      max-width: 1400px; 
+      margin: 0 auto; 
+      text-align: center;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      position: relative;
     }
+
+    .gallery-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00ff88, transparent);
+    }
+
     .gallery-title {
-      font-size:3rem; 
-      font-weight:900; 
-      margin-bottom:60px;
-      text-shadow:0 0 20px rgba(0,255,136,0.7);
+      font-size: 3.5rem; 
+      font-weight: 900; 
+      margin-bottom: 30px;
+      color: #00ff88;
+      text-shadow: 0 0 20px rgba(0,255,136,0.6);
+      letter-spacing: 3px;
     }
+
+    .gallery-subtitle {
+      font-size: 1.2rem;
+      color: #aaa;
+      margin-bottom: 50px;
+      font-weight: 400;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .filter-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: rgba(0,255,136,0.1);
+      color: #00ff88;
+      border: 2px solid rgba(0,255,136,0.3);
+      padding: 10px 25px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: #00ff88;
+      color: #1a1a1a;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,255,136,0.3);
+    }
+
     .gallery-grid {
-      display:grid; 
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:30px;
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      padding: 0;
+      opacity: 1;
+      transition: opacity 0.3s ease;
     }
+
     .meme-card {
-      background:rgba(255,255,255,0.05); 
-      padding:20px; 
-      border-radius:12px;
-      text-align:center; 
-      transition:transform 0.3s ease; 
-      cursor:pointer;
+      background: rgba(255,255,255,0.03); 
+      border-radius: 20px;
+      text-align: center; 
+      transition: all 0.5s ease; 
+      cursor: pointer;
+      border: 2px solid rgba(0,255,136,0.1);
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      opacity: 1;
+      transform: scale(1);
     }
-    .meme-card:hover { transform:translateY(-8px); }
+
+    .meme-card.hidden {
+      opacity: 0;
+      transform: scale(0.8);
+      pointer-events: none;
+    }
+
+    .meme-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(
+        from 0deg,
+        transparent,
+        rgba(0,255,136,0.1),
+        transparent,
+        rgba(0,255,200,0.1),
+        transparent
+      );
+      animation: rotate 4s linear infinite;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .meme-card:hover::before {
+      opacity: 1;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .meme-card::after {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      background: rgba(10,10,10,0.95);
+      border-radius: 18px;
+      z-index: 1;
+    }
+
+    .meme-card:hover { 
+      transform: translateY(-15px) scale(1.05);
+      box-shadow: 
+        0 25px 50px rgba(0,0,0,0.4),
+        0 0 40px rgba(0,255,136,0.3);
+      border-color: rgba(0,255,136,0.4);
+    }
+
     .meme-card img {
-      max-width:100%; 
-      border-radius:8px; 
-      margin-bottom:15px;
+      max-width: 100%; 
+      max-height: 100%;
+      border-radius: 15px; 
+      transition: all 0.4s ease;
+      position: relative;
+      z-index: 2;
+      object-fit: contain;
+    }
+
+    .meme-card:hover img {
+      transform: scale(1.1);
+      filter: brightness(1.1) saturate(1.2);
+    }
+
+    .meme-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      color: white;
+      padding: 20px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      z-index: 3;
+      border-radius: 0 0 18px 18px;
+    }
+
+    .meme-card:hover .meme-overlay {
+      transform: translateY(0);
+    }
+
+    .meme-overlay h3 {
+      margin: 0 0 5px 0;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #00ff88;
+    }
+
+    .meme-overlay p {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.8;
     }
 
     /* Lightbox */
     .lightbox {
-      position:fixed; 
-      top:0; left:0; 
-      width:100%; height:100%;
-      background:rgba(0,0,0,0.9); 
-      display:none;
-      align-items:center; 
-      justify-content:center;
-      z-index:100;
-      flex-direction:column;
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%;
+      background: rgba(0,0,0,0.95); 
+      display: none;
+      align-items: center; 
+      justify-content: center;
+      z-index: 2000;
+      flex-direction: column;
+      backdrop-filter: blur(5px);
     }
+
     .lightbox img {
-      max-width:90%; 
-      max-height:80%; 
-      border-radius:12px;
+      max-width: 90%; 
+      max-height: 80%; 
+      border-radius: 15px;
+      box-shadow: 0 0 50px rgba(0,255,136,0.3);
     }
-    .lightbox:target { display:flex; }
+
+    .lightbox:target { 
+      display: flex; 
+    }
 
     .close-btn {
-      position:absolute; 
-      top:20px; right:30px;
-      font-size:2rem; 
-      color:#fff; 
-      text-decoration:none;
-      font-weight:900; 
-      transition:color 0.3s ease;
+      position: absolute; 
+      top: 30px; 
+      right: 40px;
+      font-size: 2.5rem; 
+      color: #fff; 
+      text-decoration: none;
+      font-weight: 900; 
+      transition: all 0.3s ease;
+      background: rgba(0,0,0,0.5);
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
     }
-    .close-btn:hover { color:#00ff88; }
+
+    .close-btn:hover { 
+      color: #00ff88;
+      background: rgba(0,0,0,0.8);
+      transform: scale(1.1);
+    }
+
+    footer {
+      background: linear-gradient(135deg, #0a0a0a 0%, #000000 100%);
+      padding: 60px 20px 40px;
+      text-align: center;
+      border-top: 1px solid rgba(0,255,136,0.3);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      background: linear-gradient(135deg, #00ff88, #00cc70);
+      color: #1a1a1a;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 
+        0 0 20px rgba(0,255,136,0.3),
+        0 5px 15px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+    }
+
+    .social-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .social-btn:hover::before {
+      left: 100%;
+    }
+
+    .social-btn:hover {
+      background: linear-gradient(135deg, #00ffaa, #00dd88);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 
+        0 0 30px rgba(0,255,136,0.5),
+        0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    .ca-section {
+      background: linear-gradient(135deg, rgba(0,255,136,0.1), rgba(0,204,112,0.1));
+      padding: 25px 40px;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border: 2px solid rgba(0,255,136,0.3);
+      box-shadow: 0 0 20px rgba(0,255,136,0.2);
+      margin-bottom: 30px;
+    }
+
+    .copy-btn {
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 0 15px rgba(52,152,219,0.3);
+    }
+
+    .copy-btn:hover {
+      background: linear-gradient(135deg, #2980b9, #1f618d);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(52,152,219,0.5);
+    }
+
+    .footer-text {
+      font-size: 0.9rem;
+      color: #888;
+      margin-top: 20px;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+
+    .mobile-menu span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background: #00ff88;
+      margin: 3px 0;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        padding: 0 20px;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: rgba(0,0,0,0.95);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 40px;
+        padding-top: 60px;
+        transition: left 0.3s ease;
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .mobile-menu {
+        display: flex;
+      }
+
+      .hero h1 {
+        font-size: 4rem;
+        letter-spacing: 8px;
+      }
+
+      .gallery-section {
+        padding: 100px 20px 60px;
+      }
+
+      .gallery-title {
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+        margin-bottom: 40px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .filter-buttons {
+        gap: 10px;
+      }
+
+      .filter-btn {
+        padding: 8px 20px;
+        font-size: 0.8rem;
+      }
+
+      .social-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .social-btn {
+        width: 200px;
+        padding: 12px 25px;
+        font-size: 1rem;
+      }
+
+      .ca-section {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px 30px;
+        font-size: 1rem;
+      }
+
+      .close-btn {
+        top: 20px;
+        right: 20px;
+        font-size: 2rem;
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 3rem;
+        letter-spacing: 5px;
+      }
+
+      .gallery-title {
+        font-size: 2rem;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+    }
   </style>
 </head>
 <body>
-  <header id="mainHeader">
+  <header>
     <div class="logo">PRISMO</div>
-    <ul class="nav-links">
+    <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
       <li><a href="prismogallery.html">Prismo Gallery</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
+    <div class="mobile-menu" id="mobileMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </header>
 
   <section class="hero">
@@ -162,18 +632,93 @@
 
   <section id="gallery" class="gallery-section">
     <h2 class="gallery-title">Explore the Prismo Gallery</h2>
-    <div class="gallery-grid">
-      <a href="#img1" class="meme-card"><img src="images/E99B279C-BBFF-433C-867A-2BAAE76E9045.png" alt="Prismo Meme 1"></a>
-      <a href="#img2" class="meme-card"><img src="images/DF6EC509-F237-4033-984E-BF3EE1E5007B.jpg" alt="Prismo Meme 2"></a>
-      <a href="#img3" class="meme-card"><img src="images/D0F5AA99-EDBA-4CA2-8865-B3CE4ACCC41B.png" alt="Prismo Meme 3"></a>
-      <a href="#img4" class="meme-card"><img src="images/B40C5075-2070-4B7C-9055-CBE28822B840.webp" alt="Prismo Meme 4"></a>
-      <a href="#img5" class="meme-card"><img src="images/AF5A7543-139A-4A3E-8D15-BAC539C9B8BB.webp" alt="Prismo Meme 5"></a>
-      <a href="#img6" class="meme-card"><img src="images/78B75B49-13DA-49C0-AE37-4E9F43AA9348.webp" alt="Prismo Meme 6"></a>
-      <a href="#img7" class="meme-card"><img src="images/45B57BA0-FB5C-41FD-9FC9-CAA7FB801E0C.webp" alt="Prismo Meme 7"></a>
-      <a href="#img8" class="meme-card"><img src="images/4113DDA5-4897-4BC0-9438-EF7C64F56F5E.webp" alt="Prismo Meme 8"></a>
-      <a href="#img9" class="meme-card"><img src="images/35565A88-8E02-481B-8CC6-2073AE7797C1.webp" alt="Prismo Meme 9"></a>
-      <a href="#img10" class="meme-card"><img src="images/20E0B872-433F-4852-A5CF-6A7962334FFB.jpg" alt="Prismo Meme 10"></a>
-      <a href="#img11" class="meme-card"><img src="images/13D46BBA-32A5-4AB7-B575-5218B6326F56.png" alt="Prismo Meme 11"></a>
+    <p class="gallery-subtitle">A collection of cosmic memes, art, and chaos from the PRISMO universe</p>
+    
+    <div class="filter-buttons">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="memes">Memes</button>
+      <button class="filter-btn" data-filter="art">Art</button>
+      <button class="filter-btn" data-filter="cosmic">Cosmic</button>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+      <a href="#img1" class="meme-card" data-category="art">
+        <img src="images/E99B279C-BBFF-433C-867A-2BAAE76E9045.png" alt="Prismo Art 1">
+        <div class="meme-overlay">
+          <h3>Prism Vision</h3>
+          <p>Digital art piece #1</p>
+        </div>
+      </a>
+      <a href="#img2" class="meme-card" data-category="cosmic">
+        <img src="images/DF6EC509-F237-4033-984E-BF3EE1E5007B.jpg" alt="Cosmic Prismo">
+        <div class="meme-overlay">
+          <h3>Cosmic Energy</h3>
+          <p>Following the beam</p>
+        </div>
+      </a>
+      <a href="#img3" class="meme-card" data-category="memes">
+        <img src="images/D0F5AA99-EDBA-4CA2-8865-B3CE4ACCC41B.png" alt="Prismo Meme">
+        <div class="meme-overlay">
+          <h3>Meme Magic</h3>
+          <p>Pure chaos energy</p>
+        </div>
+      </a>
+      <a href="#img4" class="meme-card" data-category="art">
+        <img src="images/B40C5075-2070-4B7C-9055-CBE28822B840.webp" alt="Prismo Art 2">
+        <div class="meme-overlay">
+          <h3>Spectrum Art</h3>
+          <p>Refracted reality</p>
+        </div>
+      </a>
+      <a href="#img5" class="meme-card" data-category="cosmic">
+        <img src="images/AF5A7543-139A-4A3E-8D15-BAC539C9B8BB.webp" alt="Cosmic Prismo 2">
+        <div class="meme-overlay">
+          <h3>Dimensional</h3>
+          <p>Beyond space and time</p>
+        </div>
+      </a>
+      <a href="#img6" class="meme-card" data-category="memes">
+        <img src="images/78B75B49-13DA-49C0-AE37-4E9F43AA9348.webp" alt="Prismo Meme 2">
+        <div class="meme-overlay">
+          <h3>Community</h3>
+          <p>Beam followers unite</p>
+        </div>
+      </a>
+      <a href="#img7" class="meme-card" data-category="art">
+        <img src="images/45B57BA0-FB5C-41FD-9FC9-CAA7FB801E0C.webp" alt="Prismo Art 3">
+        <div class="meme-overlay">
+          <h3>Prismatic</h3>
+          <p>Light bending creation</p>
+        </div>
+      </a>
+      <a href="#img8" class="meme-card" data-category="cosmic">
+        <img src="images/4113DDA5-4897-4BC0-9438-EF7C64F56F5E.webp" alt="Cosmic Prismo 3">
+        <div class="meme-overlay">
+          <h3>Infinite</h3>
+          <p>Endless possibilities</p>
+        </div>
+      </a>
+      <a href="#img9" class="meme-card" data-category="memes">
+        <img src="images/35565A88-8E02-481B-8CC6-2073AE7797C1.webp" alt="Prismo Meme 3">
+        <div class="meme-overlay">
+          <h3>Wavelength</h3>
+          <p>On the same frequency</p>
+        </div>
+      </a>
+      <a href="#img10" class="meme-card" data-category="art">
+        <img src="images/20E0B872-433F-4852-A5CF-6A7962334FFB.jpg" alt="Prismo Art 4">
+        <div class="meme-overlay">
+          <h3>Portal</h3>
+          <p>Gateway to the prism</p>
+        </div>
+      </a>
+      <a href="#img11" class="meme-card" data-category="cosmic">
+        <img src="images/13D46BBA-32A5-4AB7-B575-5218B6326F56.png" alt="Cosmic Final">
+        <div class="meme-overlay">
+          <h3>Evolution</h3>
+          <p>The next wavelength</p>
+        </div>
+      </a>
     </div>
   </section>
 
@@ -189,5 +734,89 @@
   <div id="img9" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/35565A88-8E02-481B-8CC6-2073AE7797C1.webp" alt=""></div>
   <div id="img10" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/20E0B872-433F-4852-A5CF-6A7962334FFB.jpg" alt=""></div>
   <div id="img11" class="lightbox"><a href="#" class="close-btn">✕</a><img src="images/13D46BBA-32A5-4AB7-B575-5218B6326F56.png" alt=""></div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="social-links">
+        <a href="https://x.com/USERNAME" target="_blank" class="social-btn">Follow on X</a>
+        <a href="https://x.com/i/communities/COMMUNITYID" target="_blank" class="social-btn">Join Community</a>
+        <a href="https://pump.fun/coin/CONTRACTADDRESS" target="_blank" class="social-btn">Buy on Pump.fun</a>
+      </div>
+      
+      <div class="ca-section">
+        CA: COMING SOON
+        <button class="copy-btn" onclick="copyCA()">Copy</button>
+      </div>
+      
+      <div class="footer-text">
+        © 2025 PRISMO. Following the beam into infinite possibilities.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Gallery filtering functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.meme-card');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const filter = button.getAttribute('data-filter');
+        
+        // Update active button
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        // Filter items with animation
+        galleryItems.forEach(item => {
+          const category = item.getAttribute('data-category');
+          
+          if (filter === 'all' || category === filter) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // Mobile menu toggle
+    const mobileMenu = document.getElementById('mobileMenu');
+    const navLinks = document.getElementById('navLinks');
+
+    mobileMenu.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking on a link
+    navLinks.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A') {
+        navLinks.classList.remove('active');
+      }
+    });
+
+    // Copy CA function
+    function copyCA() {
+      navigator.clipboard.writeText("COMING SOON").then(() => {
+        const btn = document.querySelector('.copy-btn');
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.background = 'linear-gradient(135deg, #3498db, #2980b9)';
+        }, 2000);
+      }).catch(() => {
+        alert("CA copied to clipboard!");
+      });
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.contains(e.target) && !navLinks.contains(e.target)) {
+        navLinks.classList.remove('active');
+      }
+    });
+  </script>
 </body>
 </html>
