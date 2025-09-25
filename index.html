@@ -259,6 +259,15 @@
     const tagline = document.getElementById('tagline');
     const followBtn = document.getElementById('followBtn');
 
+    // Debug video loading
+    teaserVideo.addEventListener('loadstart', () => console.log('Video loading started'));
+    teaserVideo.addEventListener('canplay', () => console.log('Video can play'));
+    teaserVideo.addEventListener('error', (e) => {
+      console.log('Video error:', e);
+      // Fallback - show content immediately if video fails
+      setTimeout(showContent, 1000);
+    });
+
     // Show content after video ends
     teaserVideo.addEventListener('ended', showContent);
 
@@ -286,17 +295,20 @@
       }, 1800);
     }
 
-    // Fallback for autoplay issues - show content after 3 seconds if video doesn't play
+    // Force video to play
+    teaserVideo.play().catch(e => {
+      console.log('Autoplay failed:', e);
+      // If autoplay fails, show content after 5 seconds
+      setTimeout(showContent, 5000);
+    });
+
+    // Fallback for autoplay issues - show content after 10 seconds if video doesn't play
     setTimeout(() => {
       if (teaserVideo.paused || teaserVideo.currentTime === 0) {
+        console.log('Video not playing, showing content');
         showContent();
       }
-    }, 3000);
-
-    // Also trigger if video fails to load
-    teaserVideo.addEventListener('error', () => {
-      setTimeout(showContent, 1000);
-    });
+    }, 10000);
   </script>
 </body>
 </html>
