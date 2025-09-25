@@ -264,27 +264,23 @@
 
     function showContent() {
       // Coming Soon appears first
-      comingSoon.style.display = 'block';
       comingSoon.style.visibility = 'visible';
       comingSoon.style.animation = 'majesticFadeIn 1.5s ease-out forwards';
       
       // Title appears after Coming Soon
       setTimeout(() => {
-        prismoTitle.style.display = 'block';
         prismoTitle.style.visibility = 'visible';
         prismoTitle.style.animation = 'titleMajesticFadeIn 2s ease-out forwards';
       }, 600);
       
       // Tagline appears next
       setTimeout(() => {
-        tagline.style.display = 'block';
         tagline.style.visibility = 'visible';
         tagline.style.animation = 'majesticFadeIn 1.5s ease-out forwards';
       }, 1200);
       
       // Follow button appears last with pulse
       setTimeout(() => {
-        followBtn.style.display = 'inline-block';
         followBtn.style.visibility = 'visible';
         followBtn.style.animation = 'majesticFadeIn 1.8s ease-out forwards, pulse 2s infinite 2s';
       }, 1800);
