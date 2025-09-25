@@ -237,80 +237,17 @@
   </style>
 </head>
 <body>
-  <section class="intro">
-    <video id="teaserVideo" autoplay muted playsinline>
-      <source src="images/grok-video-bda9c611-9b22-4101-a20c-1d58ac357ced.mp4" type="video/mp4">
-    </video>
-    <div class="overlay"></div>
+  <div class="background-image"></div>
+  <div class="overlay"></div>
+  
+  <div class="teaser-container">
+    <div class="coming-soon">Coming Soon</div>
     
-    <div class="teaser-container">
-      <div id="comingSoon" class="coming-soon">Coming Soon</div>
-      
-      <h1 id="prismoTitle" class="prismo-title">PRISMO</h1>
-      
-      <div id="tagline" class="tagline">A Prism in the Void</div>
-      
-      <a href="https://x.com/prismofun" target="_blank" id="followBtn" class="follow-btn">Follow on X</a>
-    </div>
-  </section>
-
-  <script>
-    const teaserVideo = document.getElementById('teaserVideo');
-    const comingSoon = document.getElementById('comingSoon');
-    const prismoTitle = document.getElementById('prismoTitle');
-    const tagline = document.getElementById('tagline');
-    const followBtn = document.getElementById('followBtn');
-
-    // Debug video loading
-    teaserVideo.addEventListener('loadstart', () => console.log('Video loading started'));
-    teaserVideo.addEventListener('canplay', () => console.log('Video can play'));
-    teaserVideo.addEventListener('error', (e) => {
-      console.log('Video error:', e);
-      // Fallback - show content immediately if video fails
-      setTimeout(showContent, 1000);
-    });
-
-    // Show content after video ends
-    teaserVideo.addEventListener('ended', showContent);
-
-    function showContent() {
-      // Coming Soon appears first
-      comingSoon.style.visibility = 'visible';
-      comingSoon.style.animation = 'majesticFadeIn 1.5s ease-out forwards';
-      
-      // Title appears after Coming Soon
-      setTimeout(() => {
-        prismoTitle.style.visibility = 'visible';
-        prismoTitle.style.animation = 'titleMajesticFadeIn 2s ease-out forwards';
-      }, 600);
-      
-      // Tagline appears next
-      setTimeout(() => {
-        tagline.style.visibility = 'visible';
-        tagline.style.animation = 'majesticFadeIn 1.5s ease-out forwards';
-      }, 1200);
-      
-      // Follow button appears last with pulse
-      setTimeout(() => {
-        followBtn.style.visibility = 'visible';
-        followBtn.style.animation = 'majesticFadeIn 1.8s ease-out forwards, pulse 2s infinite 2s';
-      }, 1800);
-    }
-
-    // Force video to play
-    teaserVideo.play().catch(e => {
-      console.log('Autoplay failed:', e);
-      // If autoplay fails, show content after 5 seconds
-      setTimeout(showContent, 5000);
-    });
-
-    // Fallback for autoplay issues - show content after 10 seconds if video doesn't play
-    setTimeout(() => {
-      if (teaserVideo.paused || teaserVideo.currentTime === 0) {
-        console.log('Video not playing, showing content');
-        showContent();
-      }
-    }, 10000);
-  </script>
+    <h1 class="prismo-title">PRISMO</h1>
+    
+    <div class="tagline">A Prism in the Void</div>
+    
+    <a href="https://x.com/prismofun" target="_blank" class="follow-btn">Follow on X</a>
+  </div>
 </body>
 </html>
