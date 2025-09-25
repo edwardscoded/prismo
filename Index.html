@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PRISMO - Coming Soon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body { 
+      margin: 0; 
+      font-family: 'Poppins', sans-serif; 
+      background: #0f0f1a; 
+      color: white; 
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .teaser-container {
+      text-align: center;
+      max-width: 800px;
+      padding: 40px 20px;
+      animation: fadeInUp 1.5s ease-out;
+    }
+
+    .teaser-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 20px;
+      margin-bottom: 40px;
+      box-shadow: 
+        0 20px 40px rgba(0,0,0,0.5),
+        0 0 60px rgba(0,255,136,0.2);
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    .coming-soon {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #00ff88;
+      margin-bottom: 20px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+
+    .prismo-title {
+      font-size: 6rem;
+      font-weight: 900;
+      letter-spacing: 10px;
+      color: #fff;
+      text-shadow:
+        0 0 30px rgba(0,255,136,0.8),
+        0 0 60px rgba(0,255,136,0.6),
+        0 0 90px rgba(0,255,136,0.4),
+        0 0 120px rgba(0,255,136,0.2);
+      margin: 20px 0;
+      animation: titleGlow 3s ease-in-out infinite alternate;
+    }
+
+    .tagline {
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: #e0e0e0;
+      margin-bottom: 50px;
+      letter-spacing: 2px;
+      opacity: 0.9;
+    }
+
+    .follow-btn {
+      background: linear-gradient(135deg, #00ff88, #00cc70);
+      color: #1a1a1a;
+      padding: 20px 50px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: all 0.4s ease;
+      box-shadow: 
+        0 0 30px rgba(0,255,136,0.4),
+        0 10px 25px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .follow-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .follow-btn:hover::before {
+      left: 100%;
+    }
+
+    .follow-btn:hover {
+      background: linear-gradient(135deg, #00ffaa, #00dd88);
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 
+        0 0 40px rgba(0,255,136,0.6),
+        0 15px 35px rgba(0,0,0,0.4);
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes titleGlow {
+      0% {
+        text-shadow:
+          0 0 30px rgba(0,255,136,0.8),
+          0 0 60px rgba(0,255,136,0.6),
+          0 0 90px rgba(0,255,136,0.4);
+      }
+      100% {
+        text-shadow:
+          0 0 40px rgba(0,255,200,1),
+          0 0 80px rgba(0,255,200,0.8),
+          0 0 120px rgba(0,255,200,0.6);
+      }
+    }
+
+    @keyframes glow {
+      0% {
+        box-shadow: 
+          0 20px 40px rgba(0,0,0,0.5),
+          0 0 60px rgba(0,255,136,0.2);
+      }
+      100% {
+        box-shadow: 
+          0 25px 50px rgba(0,0,0,0.6),
+          0 0 80px rgba(0,255,136,0.4);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 
+          0 0 30px rgba(0,255,136,0.4),
+          0 10px 25px rgba(0,0,0,0.3);
+      }
+      50% {
+        box-shadow: 
+          0 0 50px rgba(0,255,136,0.7),
+          0 10px 25px rgba(0,0,0,0.3);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .prismo-title {
+        font-size: 4rem;
+        letter-spacing: 6px;
+      }
+      
+      .tagline {
+        font-size: 1.3rem;
+        letter-spacing: 1px;
+      }
+      
+      .coming-soon {
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+      }
+      
+      .follow-btn {
+        padding: 15px 35px;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+      }
+      
+      .teaser-container {
+        padding: 20px 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .prismo-title {
+        font-size: 3rem;
+        letter-spacing: 3px;
+      }
+      
+      .tagline {
+        font-size: 1.1rem;
+      }
+      
+      .coming-soon {
+        font-size: 1rem;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="teaser-container">
+    <img src="images/Untitled design.png" alt="PRISMO Teaser" class="teaser-image">
+    
+    <div class="coming-soon">Coming Soon</div>
+    
+    <h1 class="prismo-title">PRISMO</h1>
+    
+    <div class="tagline">A Prism in the Void</div>
+    
+    <a href="https://x.com/prismofun" target="_blank" class="follow-btn">Follow on X</a>
+  </div>
+</body>
+</html>
